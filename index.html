@@ -3,22 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deconstructing the Hill Avenue Pathway Agreement</title>
+    <title>Leave it to Raquel | Professional House Cleaning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fraunces:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --primary: #0a7c8c;
-        --secondary: #114b5f;
-        --accent: #ffc857;
-        --surface: #f5f7fa;
-        --muted: #637381;
-        --text: #1f2933;
-        --background: #ffffff;
+        --primary: #4c6ef5;
+        --primary-dark: #364fc7;
+        --accent: #f6b93b;
+        --background: #f5f7fb;
+        --card-bg: #ffffff;
+        --text: #1d1f2f;
+        --muted: #6b7280;
+        --radius: 18px;
+        --shadow: 0 20px 45px rgba(76, 110, 245, 0.12);
       }
 
       *,
@@ -29,505 +31,874 @@
 
       body {
         margin: 0;
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--text);
-        background: var(--surface);
+        background: var(--background);
         line-height: 1.7;
       }
 
       h1,
       h2,
       h3 {
-        font-family: "Playfair Display", Georgia, serif;
-        color: var(--secondary);
-        margin-top: 0;
-      }
-
-      h1 {
-        font-size: clamp(2.6rem, 5vw, 3.4rem);
-        letter-spacing: 0.04em;
-      }
-
-      h2 {
-        font-size: clamp(2rem, 4vw, 2.6rem);
-      }
-
-      h3 {
-        font-size: clamp(1.4rem, 3vw, 1.65rem);
-      }
-
-      p {
-        margin: 0 0 1.1rem;
+        font-family: "Fraunces", "Poppins", sans-serif;
+        margin: 0;
         color: var(--text);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .hero-art {
+        display: block;
+        max-width: 420px;
+        border-radius: clamp(18px, 4vw, 28px);
+        box-shadow: 0 25px 40px rgba(54, 79, 199, 0.22);
+        overflow: hidden;
+      }
+
+      .service-art {
+        display: block;
+        width: 120px;
+        margin: 0 auto 1.2rem;
+      }
+
+      .about-art {
+        display: block;
+        max-width: 360px;
+      }
+
+      .booking-art {
+        display: block;
+        max-width: 320px;
+      }
+
+      .hero-art svg,
+      .service-art svg,
+      .about-art svg,
+      .booking-art svg {
+        width: 100%;
+        height: auto;
+        display: block;
       }
 
       a {
         color: inherit;
+        text-decoration: none;
       }
 
-      .hero {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(120deg, rgba(17, 75, 95, 0.92), rgba(10, 124, 140, 0.92)),
-          url("https://images.unsplash.com/photo-1536148935331-408321065b18?auto=format&fit=crop&w=1600&q=80") center/cover;
-        color: white;
-        padding: 5rem 1.5rem 6rem;
-        text-align: center;
-      }
-
-      .hero .intro {
-        max-width: 920px;
-        margin: 0 auto;
-      }
-
-      .hero p {
-        font-size: clamp(1.1rem, 2.3vw, 1.3rem);
-        color: rgba(255, 255, 255, 0.92);
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(245, 247, 251, 0.9);
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
       }
 
       nav {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem 2rem;
-        background: white;
-        padding: 1.25rem;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 6px 16px rgba(17, 75, 95, 0.08);
-      }
-
-      nav a {
-        text-decoration: none;
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        font-size: 0.92rem;
-        color: var(--secondary);
-        transition: color 0.2s ease;
-      }
-
-      nav a:hover,
-      nav a:focus {
-        color: var(--primary);
-      }
-
-      section {
-        padding: 4rem 1.5rem;
-      }
-
-      .wrapper {
-        max-width: 1100px;
+        max-width: 1160px;
         margin: 0 auto;
+        padding: 1rem clamp(1.2rem, 5vw, 2.5rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
       }
 
-      .highlight-grid {
-        display: grid;
-        gap: 1.75rem;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        margin-top: 2.5rem;
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+        color: var(--primary-dark);
       }
 
-      .card {
-        background: var(--background);
-        border-radius: 18px;
-        padding: 1.75rem;
-        box-shadow: 0 18px 35px rgba(17, 75, 95, 0.08);
-        border: 1px solid rgba(10, 124, 140, 0.08);
+      .brand span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        font-weight: 700;
       }
 
-      .card h3 {
-        margin-bottom: 0.75rem;
-      }
-
-      .key-facts {
-        display: grid;
-        gap: 1.25rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        margin-top: 2.5rem;
-      }
-
-      .fact {
-        background: #ffffff;
-        border-radius: 14px;
-        padding: 1.5rem;
-        border-left: 6px solid var(--accent);
-        box-shadow: 0 10px 24px rgba(17, 75, 95, 0.08);
-      }
-
-      .fact strong {
-        display: block;
-        font-size: 0.95rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
+      .nav-links {
+        display: flex;
+        gap: clamp(1rem, 4vw, 2rem);
+        font-weight: 500;
         color: var(--muted);
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1.75rem;
-        background: white;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 16px 32px rgba(17, 75, 95, 0.08);
+      .nav-links a {
+        position: relative;
+        padding-bottom: 0.35rem;
       }
 
-      .sr-only {
+      .nav-links a::after {
+        content: "";
         position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
       }
 
-      th,
-      td {
-        padding: 1.15rem 1.25rem;
-        text-align: left;
+      .nav-links a:hover::after,
+      .nav-links a:focus-visible::after {
+        transform: scaleX(1);
       }
 
-      thead {
-        background: rgba(10, 124, 140, 0.12);
+      .hero {
+        padding: clamp(4rem, 7vw, 6rem) clamp(1.4rem, 5vw, 2.5rem) 0;
       }
 
-      tbody tr:nth-child(even) {
-        background: rgba(10, 124, 140, 0.04);
-      }
-
-      .scope-grid {
+      .hero-inner {
+        max-width: 1160px;
+        margin: 0 auto;
         display: grid;
-        gap: 1.75rem;
-        margin-top: 2.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+        gap: clamp(2rem, 6vw, 4rem);
+        padding: clamp(2.5rem, 6vw, 4rem);
+        background: linear-gradient(145deg, rgba(76, 110, 245, 0.12), rgba(54, 79, 199, 0.09));
+        border-radius: clamp(24px, 5vw, 36px);
+        box-shadow: var(--shadow);
       }
 
-      .scope-grid .card {
-        border-left: 6px solid var(--primary);
+      .hero-copy h1 {
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        line-height: 1.15;
       }
 
-      .rulebook {
-        margin-top: 2.5rem;
+      .hero-copy p {
+        margin: 1.2rem 0 2rem;
+        color: var(--muted);
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+      }
+
+      .cta-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.95rem 1.8rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn.primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        box-shadow: 0 15px 30px rgba(76, 110, 245, 0.25);
+      }
+
+      .btn.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 35px rgba(76, 110, 245, 0.3);
+      }
+
+      .btn.secondary {
+        background: white;
+        color: var(--primary-dark);
+        border: 1px solid rgba(76, 110, 245, 0.2);
+      }
+
+      .hero-visual {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .hero-visual::before {
+        content: "";
+        position: absolute;
+        inset: -18% -12% -12% -10%;
+        background: radial-gradient(circle at top left, rgba(76, 110, 245, 0.25), transparent 62%);
+        z-index: -1;
+        border-radius: 40px;
+        transform: rotate(-5deg);
+      }
+
+      section {
+        padding: clamp(3.5rem, 7vw, 5rem) clamp(1.4rem, 5vw, 2.5rem);
+      }
+
+      .section-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.9rem;
+        background: rgba(76, 110, 245, 0.1);
+        color: var(--primary-dark);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        border-radius: 999px;
+        font-size: 0.78rem;
+      }
+
+      .section-heading {
+        margin: 1rem 0 1.25rem;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+      }
+
+      .section-subheading {
+        color: var(--muted);
+        max-width: 640px;
+      }
+
+      .services-grid {
+        margin-top: 3rem;
         display: grid;
-        gap: 1.5rem;
-      }
-
-      .rulebook article {
-        background: #ffffff;
-        border-radius: 18px;
-        padding: 1.75rem;
-        box-shadow: 0 16px 28px rgba(17, 75, 95, 0.08);
-        border: 1px solid rgba(10, 124, 140, 0.12);
-      }
-
-      .rulebook h3 {
-        margin-bottom: 0.6rem;
-      }
-
-      .forms {
-        margin-top: 2.5rem;
-      }
-
-      .forms-list {
-        display: grid;
-        gap: 1.5rem;
+        gap: clamp(1.5rem, 4vw, 2.2rem);
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       }
 
-      .callout {
-        background: linear-gradient(135deg, rgba(17, 75, 95, 0.95), rgba(10, 124, 140, 0.92));
-        color: white;
-        border-radius: 18px;
-        padding: 2.5rem;
-        margin-top: 3rem;
-        box-shadow: 0 22px 40px rgba(17, 75, 95, 0.22);
+      .service-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: 0 16px 35px rgba(15, 23, 42, 0.06);
+        display: grid;
+        gap: 1.1rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .callout ol {
-        margin: 1.5rem 0 0;
-        padding-left: 1.25rem;
+      .service-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 40px rgba(15, 23, 42, 0.08);
+      }
+
+      .service-card img {
+        height: 120px;
+        object-fit: contain;
+      }
+
+      .service-card h3 {
+        font-size: 1.35rem;
+      }
+
+      .highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: clamp(1.5rem, 4vw, 2.5rem);
+        margin-top: 3rem;
+      }
+
+      .highlight-card {
+        padding: 1.8rem;
+        border-radius: var(--radius);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(247, 250, 255, 0.8));
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.05);
+        border: 1px solid rgba(76, 110, 245, 0.08);
+      }
+
+      .highlight-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .about {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: center;
+      }
+
+      .about figure {
+        margin: 0;
+      }
+
+      .about-art {
+        max-width: 360px;
+      }
+
+      .about-art svg {
+        border-radius: clamp(20px, 5vw, 32px);
+        box-shadow: 0 25px 45px rgba(76, 110, 245, 0.2);
+      }
+
+      .booking {
+        background: linear-gradient(135deg, rgba(76, 110, 245, 0.15), rgba(246, 185, 59, 0.1));
+      }
+
+      .booking-card {
+        margin-top: 3rem;
+        background: var(--card-bg);
+        border-radius: clamp(24px, 5vw, 32px);
+        padding: clamp(2rem, 5vw, 3rem);
+        box-shadow: 0 25px 45px rgba(15, 23, 42, 0.08);
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        align-items: center;
+      }
+
+      form {
+        display: grid;
+        gap: 1.3rem;
+      }
+
+      label {
+        display: grid;
+        gap: 0.5rem;
+        font-weight: 500;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 0.9rem 1rem;
+        border-radius: 14px;
+        border: 1px solid rgba(76, 110, 245, 0.25);
+        background: #fdfdff;
+        font-family: inherit;
+        font-size: 1rem;
+        color: var(--text);
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2);
+      }
+
+      textarea {
+        min-height: 130px;
+        resize: vertical;
+      }
+
+      .booking-visual {
+        background: rgba(76, 110, 245, 0.08);
+        border-radius: clamp(18px, 4vw, 28px);
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        display: grid;
+        gap: 1rem;
+        align-items: start;
+        box-shadow: inset 0 0 0 1px rgba(76, 110, 245, 0.12);
+      }
+
+      .booking-art {
+        border-radius: clamp(14px, 3vw, 20px);
+        box-shadow: 0 20px 35px rgba(54, 79, 199, 0.2);
+        overflow: hidden;
+      }
+
+      .testimonials {
+        background: var(--card-bg);
+        border-radius: clamp(22px, 5vw, 30px);
+        box-shadow: 0 25px 45px rgba(15, 23, 42, 0.08);
+        padding: clamp(2.5rem, 5vw, 3.5rem);
+        margin-top: 3rem;
+        display: grid;
+        gap: clamp(1.5rem, 4vw, 2.5rem);
+      }
+
+      .testimonial {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .testimonial p {
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .testimonial strong {
+        color: var(--primary-dark);
       }
 
       footer {
-        background: var(--secondary);
+        background: #0f172a;
         color: rgba(255, 255, 255, 0.85);
-        padding: 1.5rem;
-        text-align: center;
-        font-size: 0.95rem;
+        padding: 3rem clamp(1.4rem, 5vw, 2.5rem);
       }
 
-      @media (max-width: 600px) {
+      .footer-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        display: grid;
+        gap: clamp(2rem, 4vw, 3rem);
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: clamp(2rem, 4vw, 3rem);
+      }
+
+      .footer-brand span {
+        background: rgba(76, 110, 245, 0.15);
+        color: white;
+      }
+
+      .footer-links {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.75);
+        font-weight: 400;
+      }
+
+      .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      @media (max-width: 640px) {
         nav {
-          position: static;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links {
+          width: 100%;
+          justify-content: space-between;
         }
       }
     </style>
   </head>
   <body>
-    <header class="hero" id="top">
-      <div class="intro">
-        <h1>Deconstructing a Public Works Project</h1>
-        <p>
-          Welcome, future engineers and project managers. Before the first shovel touches the ground, a public works project is
-          guided by a comprehensive agreement that locks in cost, schedule, and responsibilities. Let’s unpack the Hill Avenue
-          Pathway agreement between the City of Fort Myers and Chris-Tel Construction to see how a multimillion-dollar idea
-          becomes a real pathway.
-        </p>
-        <p>
-          <strong>The Project:</strong> City of Fort Myers Hill Avenue Pathway | <strong>Guaranteed Maximum Price:</strong>
-          $1,341,193.00 | <strong>Parties:</strong> City of Fort Myers (Owner) &amp; Chris-Tel Construction, Inc.
-        </p>
-      </div>
+    <header>
+      <nav aria-label="Primary">
+        <a class="brand" href="#top">
+          <span>LR</span>
+          Leave it to Raquel
+        </a>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#about">Why Us</a>
+          <a href="#booking">Book</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
     </header>
 
-    <nav aria-label="Section navigation">
-      <a href="#cost">Project Cost</a>
-      <a href="#scope">Scope of Work</a>
-      <a href="#rules">Assumptions</a>
-      <a href="#paper-trail">Project Forms</a>
-      <a href="#lessons">Key Takeaways</a>
-    </nav>
-
-    <main>
-      <section id="cost">
-        <div class="wrapper">
-          <h2>1. The Big Number: Understanding the Project Cost</h2>
-          <p>
-            The Guaranteed Maximum Price (GMP) caps what the owner will pay for the defined scope of work. Chris-Tel Construction’s
-            commitment ensures that the Hill Avenue Pathway—labor, materials, and overhead—will not exceed $1.34 million.
-          </p>
-
-          <div class="key-facts" role="list">
-            <div class="fact" role="listitem">
-              <strong>Project Owner</strong>
-              City of Fort Myers, Florida
-            </div>
-            <div class="fact" role="listitem">
-              <strong>Contractor</strong>
-              Chris-Tel Construction, Inc.
-            </div>
-            <div class="fact" role="listitem">
-              <strong>GMP Cost Estimate</strong>
-              $1,341,193.00
-            </div>
-          </div>
-
-          <p>
-            The Summary GMP Cost Estimate breaks dozens of line items into work categories. Studying these buckets reveals where the
-            dollars go and how the path is built from the ground up.
-          </p>
-
-          <table>
-            <caption class="sr-only">Major work categories and representative costs</caption>
-            <thead>
-              <tr>
-                <th scope="col">Work Category</th>
-                <th scope="col">Key Activities &amp; Costs</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Site Preparation &amp; Demolition</td>
-                <td>
-                  Mobilization ($58,799), Traffic Control ($26,429), and Clearing &amp; Grubbing ($16,160) ready the corridor and keep
-                  the public safe before construction begins.
-                </td>
-              </tr>
-              <tr>
-                <td>Earthwork &amp; Paving</td>
-                <td>
-                  Optional Base Group ($110,791), Superpave Asphalt ($70,296), and Concrete Driveways &amp; Sidewalks ($64,660) form the
-                  pathway’s durable surface.
-                </td>
-              </tr>
-              <tr>
-                <td>Landscaping &amp; Irrigation</td>
-                <td>
-                  Sabal Palmetto palms, Clusia Rosea shrubs, Rain Bird RSD-BEX rain sensors, EFB-CP-PRS-D brass master valves, and
-                  nearly 30,000 LF of pressure compensating dripline deliver a resilient streetscape.
-                </td>
-              </tr>
-              <tr>
-                <td>Utilities &amp; Drainage</td>
-                <td>
-                  Connect to the existing irrigation network ($24,227), adjust sanitary sewer manholes ($25,250 + $15,150), and install
-                  new PVC drainage pipe ($21,589) to harmonize with city infrastructure.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="scope">
-        <div class="wrapper">
-          <h2>2. The Scope of Work: What Are We Actually Building?</h2>
-          <p>
-            The Scope of Work narrates the contractor’s obligations. Organized using the CSI MasterFormat divisions, it defines each
-            discipline that turns Hill Avenue into a complete pedestrian and bicycle corridor.
-          </p>
-
-          <div class="scope-grid" role="list">
-            <article class="card" role="listitem">
-              <h3>Division 02 — Demolition</h3>
-              <p>
-                Clear the site, remove trees and fencing, and prepare access points exactly as the construction drawings specify.
-              </p>
-            </article>
-            <article class="card" role="listitem">
-              <h3>Division 02 — Surveying</h3>
-              <p>
-                Perform pre-construction surveys, employ ground-penetrating radar to locate underground utilities, and deliver
-                certified as-built documentation when work concludes.
-              </p>
-            </article>
-            <article class="card" role="listitem">
-              <h3>Division 31 — Earthwork</h3>
-              <p>
-                Execute clearing and grubbing, excavation, and embankment operations to establish the correct grades and drainage
-                patterns for the pathway.
-              </p>
-            </article>
-            <article class="card" role="listitem">
-              <h3>Division 32 — Exterior Improvements</h3>
-              <p>
-                Install new wood fencing, signage, asphalt and concrete pavement, pavement markings, extensive landscaping, and the
-                irrigation system—representing the most cost-intensive elements of the project.
-              </p>
-            </article>
-            <article class="card" role="listitem">
-              <h3>Division 33 — Utilities</h3>
-              <p>
-                Adjust stormwater structures and set valve and meter boxes to their final elevations so the new pathway integrates with
-                existing public services.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="rules">
-        <div class="wrapper">
-          <h2>3. The Rulebook: Key Assumptions and Exclusions</h2>
-          <p>
-            Qualifications and assumptions allocate risk and clarify expectations before the contract is signed. Each clause protects
-            both parties from surprises and keeps the project moving when conditions change.
-          </p>
-
-          <div class="rulebook" role="list">
-            <article role="listitem">
-              <h3>1. Price Volatility — 30-Day Validity</h3>
-              <p>
-                The GMP is valid for 30 days. Delays in approval shift the risk of market fluctuations to the owner, incentivizing
-                swift execution while shielding the contractor from escalating material and labor costs.
-              </p>
-            </article>
-            <article role="listitem">
-              <h3>2. Permit Responsibility — Owner’s Duty</h3>
-              <p>
-                City permitting fees are excluded from the contractor’s price. The owner owns the administrative risk, while the
-                contractor focuses on construction risk without absorbing delays in the city’s internal processes.
-              </p>
-            </article>
-            <article role="listitem">
-              <h3>3. Insurance &amp; Bonds — Included in GMP</h3>
-              <p>
-                Builder’s risk insurance and payment/performance bonds are included, protecting public funds, guaranteeing
-                subcontractor payment, and securing completion if the contractor defaults.
-              </p>
-            </article>
-            <article role="listitem">
-              <h3>4. Key Exclusions — Managing Unknowns</h3>
-              <p>
-                Environmental testing, design services, and disposal of unsuitable soils are excluded. Unforeseen conditions, such as
-                unexpected geology, are handled through formal change orders instead of hidden contingencies.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="paper-trail">
-        <div class="wrapper">
-          <h2>4. The Paper Trail: Managing the Project with Essential Forms</h2>
-          <p>
-            Exhibit C of the agreement supplies the templates that guide the project from notice to closeout. Mastering these forms
-            allows project managers to track progress, payments, and accountability with precision.
-          </p>
-
-          <div class="forms">
-            <div class="forms-list" role="list">
-              <article class="card" role="listitem">
-                <h3>Notice of Award</h3>
-                <p>
-                  Issues the official green light to Chris-Tel Construction, triggering the deadlines for bonds, insurance, and
-                  contract execution.
-                </p>
-              </article>
-              <article class="card" role="listitem">
-                <h3>Payment Application</h3>
-                <p>
-                  Standardizes the contractor’s monthly request for compensation tied to completed work and stored materials.
-                </p>
-              </article>
-              <article class="card" role="listitem">
-                <h3>Construction Contract Change Order</h3>
-                <p>
-                  The formal vehicle for modifying scope, cost, or schedule once construction is underway—no change is official without
-                  it.
-                </p>
-              </article>
-              <article class="card" role="listitem">
-                <h3>Certificate of Substantial Completion</h3>
-                <p>
-                  Marks the moment the pathway is safe for public use even if minor punch-list items remain open.
-                </p>
-              </article>
-              <article class="card" role="listitem">
-                <h3>Release of Liens</h3>
-                <p>
-                  Confirms that subcontractors and suppliers have been paid in full, protecting the City from future claims.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="lessons">
-        <div class="wrapper">
-          <h2>5. Conclusion: Key Lessons from the Hill Avenue Pathway Project</h2>
-          <div class="callout">
+    <main id="top">
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Pristine Homes, Joyful Living</span>
+            <h1>Modern cleaning crafted with warmth &amp; care.</h1>
             <p>
-              A successful civil project is built first on paper and then on the ground. Internalize these lessons as you prepare to
-              lead multidisciplinary teams and navigate the administrative marathon of public works delivery.
+              Leave it to Raquel delivers vibrant, detail-obsessed cleaning and organizing services for busy families in our
+              community. Experience a sparkling home filled with calm so you can focus on what truly matters.
             </p>
-            <ol>
-              <li>
-                <strong>Demand Unambiguous Clarity:</strong> Explicitly define cost, scope, and assumptions to prevent disputes and keep
-                owner and contractor aligned.
-              </li>
-              <li>
-                <strong>Master the Administrative Process:</strong> Treat documentation as the bedrock of transparency and compliance,
-                not bureaucracy.
-              </li>
-              <li>
-                <strong>Proactively Allocate Risk:</strong> Use qualifications and assumptions to decide who owns volatility, permitting
-                delays, and hidden site conditions before construction begins.
-              </li>
-            </ol>
+            <div class="cta-group">
+              <a class="btn primary" href="#booking">Book a visit</a>
+              <a class="btn secondary" href="#services">Explore services</a>
+            </div>
+          </div>
+          <div class="hero-visual hero-art" role="img" aria-label="Cartoon cleaner tidying a bright living room">
+            <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="heroGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#6c8dff" />
+                  <stop offset="100%" stop-color="#364fc7" />
+                </linearGradient>
+                <linearGradient id="heroAccent" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffd166" />
+                  <stop offset="100%" stop-color="#f6b93b" />
+                </linearGradient>
+              </defs>
+              <rect x="24" y="24" width="272" height="272" rx="52" fill="url(#heroGradient)" opacity="0.18" />
+              <circle cx="160" cy="150" r="110" fill="#ffffff" opacity="0.9" />
+              <path d="M70 224h180a8 8 0 0 1 0 16H70a8 8 0 0 1 0-16Z" fill="#dbe4ff" />
+              <path d="M196 132c18 0 30 12 30 30s-10 44-30 44-30-26-30-44 12-30 30-30Z" fill="#6c8dff" opacity="0.2" />
+              <path d="M122 208c-6-26 8-66 34-76s50 8 56 34l8 34" fill="#f8faff" stroke="#4c6ef5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M145 140c12-12 46-12 58 10" fill="none" stroke="#4c6ef5" stroke-width="4" stroke-linecap="round" />
+              <path d="M156 118a28 28 0 1 1 56 4" fill="#ffe6a7" />
+              <path d="M189 90c14 0 24 10 24 26s-14 28-28 28-24-12-24-28 14-26 28-26Z" fill="#ffe8c9" />
+              <path d="M172 120s6 8 24 8 28-10 28-10-2 24-28 24-24-22-24-22Z" fill="#fcd37c" />
+              <path d="M206 130c-4 6-14 10-22 10" fill="none" stroke="#cc9f3b" stroke-width="3" stroke-linecap="round" />
+              <path d="M192 90c0 0 6-14 26-10 12 2 18 22 8 34 0 0-4-12-16-14-10-2-18 0-18-10Z" fill="#364fc7" />
+              <path d="M150 214 132 298" fill="none" stroke="#364fc7" stroke-width="6" stroke-linecap="round" />
+              <path d="M202 214 220 298" fill="none" stroke="#364fc7" stroke-width="6" stroke-linecap="round" />
+              <path d="M132 298h-18" fill="none" stroke="#4c6ef5" stroke-width="6" stroke-linecap="round" />
+              <path d="M222 298h24" fill="none" stroke="#4c6ef5" stroke-width="6" stroke-linecap="round" />
+              <path d="M104 210h132" fill="none" stroke="#4c6ef5" stroke-width="6" stroke-linecap="round" />
+              <path d="M120 216 104 176" fill="none" stroke="#4c6ef5" stroke-width="5" stroke-linecap="round" />
+              <path d="M102 168c6-10 20-18 34-14" fill="none" stroke="#4c6ef5" stroke-width="4" stroke-linecap="round" />
+              <path d="M90 238 72 214" fill="none" stroke="#f6b93b" stroke-width="6" stroke-linecap="round" />
+              <path d="M84 218h38" fill="none" stroke="#f6b93b" stroke-width="6" stroke-linecap="round" />
+              <path d="M222 214 248 182" fill="none" stroke="#f6b93b" stroke-width="6" stroke-linecap="round" />
+              <rect x="208" y="154" width="32" height="36" rx="8" fill="url(#heroAccent)" />
+              <path d="M246 114a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm-26-28a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm-34 164a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm72-14a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z" fill="#f6b93b" opacity="0.85" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-inner">
+          <span class="eyebrow">Services</span>
+          <h2 class="section-heading">Every space deserves a custom shine.</h2>
+          <p class="section-subheading">
+            Whether you need a one-time reset or ongoing support, Leave it to Raquel brings meticulous attention to every nook
+            and a splash of personality to every visit.
+          </p>
+
+          <div class="services-grid" role="list">
+            <article class="service-card" role="listitem">
+              <div class="service-art" role="img" aria-label="Cartoon bucket and sparkling mop representing deep cleaning">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="deepGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#5c7cfa" />
+                      <stop offset="100%" stop-color="#364fc7" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="12" y="12" width="96" height="96" rx="26" fill="url(#deepGradient)" opacity="0.18" />
+                  <path d="M44 88h32l4-28H40l4 28Z" fill="#ffffff" stroke="#4c6ef5" stroke-width="3" stroke-linejoin="round" />
+                  <path d="M38 60h44" fill="none" stroke="#4c6ef5" stroke-width="4" stroke-linecap="round" />
+                  <path d="M62 36 56 60" fill="none" stroke="#f6b93b" stroke-width="5" stroke-linecap="round" />
+                  <path d="M74 26 60 88" fill="none" stroke="#364fc7" stroke-width="6" stroke-linecap="round" />
+                  <circle cx="84" cy="40" r="6" fill="#f6b93b" />
+                  <path d="M32 48a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm54 48a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" fill="#f6b93b" opacity="0.8" />
+                </svg>
+              </div>
+              <h3>Deep Cleaning</h3>
+              <p>
+                Comprehensive top-to-bottom detailing that revives kitchens, baths, baseboards, and forgotten corners so your
+                home feels freshly renewed.
+              </p>
+            </article>
+            <article class="service-card" role="listitem">
+              <div class="service-art" role="img" aria-label="Cartoon spray bottle for light cleaning">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="lightGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#63b4ff" />
+                      <stop offset="100%" stop-color="#4c6ef5" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="12" y="12" width="96" height="96" rx="26" fill="url(#lightGradient)" opacity="0.18" />
+                  <path d="M56 32h24v12H56z" fill="#4c6ef5" />
+                  <path d="M68 44c8 0 14 6 14 16l-4 24c0 6-6 10-12 10s-12-4-12-10l-4-24c0-10 6-16 14-16h4Z" fill="#ffffff" stroke="#4c6ef5" stroke-width="3" />
+                  <path d="M50 40h36" fill="none" stroke="#f6b93b" stroke-width="4" stroke-linecap="round" />
+                  <circle cx="86" cy="36" r="5" fill="#f6b93b" />
+                  <circle cx="94" cy="30" r="4" fill="#f6b93b" opacity="0.8" />
+                  <circle cx="90" cy="46" r="3" fill="#f6b93b" opacity="0.8" />
+                </svg>
+              </div>
+              <h3>Light Cleaning</h3>
+              <p>
+                Consistent upkeep with weekly or bi-weekly visits covering dusting, surfaces, floors, and general tidying to
+                maintain everyday sparkle.
+              </p>
+            </article>
+            <article class="service-card" role="listitem">
+              <div class="service-art" role="img" aria-label="Cartoon stacked bins showing organized storage">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="organizeGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#74c0fc" />
+                      <stop offset="100%" stop-color="#4dabf7" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="12" y="12" width="96" height="96" rx="26" fill="url(#organizeGradient)" opacity="0.18" />
+                  <rect x="32" y="32" width="56" height="22" rx="6" fill="#ffffff" stroke="#4dabf7" stroke-width="3" />
+                  <rect x="26" y="58" width="68" height="22" rx="8" fill="#ffffff" stroke="#4c6ef5" stroke-width="3" />
+                  <rect x="36" y="48" width="36" height="6" rx="3" fill="#f6b93b" />
+                  <rect x="46" y="74" width="28" height="6" rx="3" fill="#f6b93b" />
+                  <circle cx="44" cy="42" r="3" fill="#4dabf7" />
+                  <circle cx="76" cy="42" r="3" fill="#4dabf7" />
+                  <circle cx="40" cy="68" r="4" fill="#4c6ef5" opacity="0.6" />
+                  <circle cx="82" cy="68" r="4" fill="#4c6ef5" opacity="0.6" />
+                </svg>
+              </div>
+              <h3>Organization Needs</h3>
+              <p>
+                Personalized decluttering sessions, aesthetic organizing, and seasonal resets that transform busy spaces into
+                calming sanctuaries.
+              </p>
+            </article>
+            <article class="service-card" role="listitem">
+              <div class="service-art" role="img" aria-label="Cartoon calendar and house for home watch">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="watchGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#91a7ff" />
+                      <stop offset="100%" stop-color="#4c6ef5" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="12" y="12" width="96" height="96" rx="26" fill="url(#watchGradient)" opacity="0.18" />
+                  <rect x="30" y="36" width="60" height="44" rx="10" fill="#ffffff" stroke="#4c6ef5" stroke-width="3" />
+                  <path d="M30 48h60" fill="none" stroke="#4c6ef5" stroke-width="3" />
+                  <circle cx="44" cy="58" r="4" fill="#f6b93b" />
+                  <circle cx="60" cy="58" r="4" fill="#f6b93b" />
+                  <circle cx="76" cy="58" r="4" fill="#f6b93b" />
+                  <path d="M52 72h16v16l-8-6-8 6V72Z" fill="#4c6ef5" opacity="0.18" />
+                  <path d="M54 78h12v12l-6-4-6 4V78Z" fill="#364fc7" />
+                  <rect x="42" y="30" width="10" height="12" rx="4" fill="#f6b93b" />
+                  <rect x="68" y="30" width="10" height="12" rx="4" fill="#f6b93b" />
+                  <path d="M92 88a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" fill="#f6b93b" opacity="0.8" />
+                </svg>
+              </div>
+              <h3>Home Watch</h3>
+              <p>
+                Trusted check-ins while you’re away. We water plants, collect mail, and make sure your home is welcoming upon
+                your return.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-inner about">
+          <figure class="about-art" role="img" aria-label="Cartoon caddy of eco-friendly cleaning tools">
+            <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="aboutGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#74c0fc" />
+                  <stop offset="100%" stop-color="#4c6ef5" />
+                </linearGradient>
+              </defs>
+              <rect x="24" y="24" width="312" height="272" rx="42" fill="url(#aboutGradient)" opacity="0.16" />
+              <rect x="60" y="84" width="240" height="168" rx="26" fill="#ffffff" />
+              <path d="M88 214h184" fill="none" stroke="#d0dcff" stroke-width="8" stroke-linecap="round" />
+              <path d="M120 120h120l16 94H104l16-94Z" fill="#f8faff" stroke="#4c6ef5" stroke-width="5" stroke-linejoin="round" />
+              <path d="M132 114a20 20 0 0 1 20-20h56a20 20 0 0 1 20 20" fill="none" stroke="#4c6ef5" stroke-width="5" stroke-linecap="round" />
+              <rect x="148" y="82" width="20" height="60" rx="8" fill="#4c6ef5" opacity="0.25" />
+              <rect x="204" y="82" width="20" height="60" rx="8" fill="#4c6ef5" opacity="0.25" />
+              <path d="M132 192h108" fill="none" stroke="#4c6ef5" stroke-width="6" stroke-linecap="round" />
+              <path d="M168 108V60c0-10 8-18 18-18s18 8 18 18v48" fill="none" stroke="#364fc7" stroke-width="6" stroke-linecap="round" />
+              <path d="M180 48a12 12 0 1 1 24 0v12h-24V48Z" fill="#364fc7" />
+              <path d="M208 102V74l32-12v12l-12 4v24" fill="#63b4ff" />
+              <path d="M220 126V86l28-10v18l-12 4v28" fill="#4c6ef5" />
+              <path d="M142 98V70l-26-8v18l10 4v24" fill="#ffd166" />
+              <path d="M128 126V90l-24-6v18l10 4v20" fill="#f6b93b" />
+              <rect x="128" y="166" width="28" height="34" rx="8" fill="#ffd166" />
+              <rect x="204" y="166" width="28" height="34" rx="8" fill="#ffd166" />
+              <circle cx="112" cy="142" r="6" fill="#f6b93b" />
+              <circle cx="244" cy="142" r="6" fill="#f6b93b" />
+              <path d="M96 226a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm204-14a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z" fill="#ffd166" opacity="0.8" />
+            </svg>
+          </figure>
+          <div>
+            <span class="eyebrow">Why leave it to Raquel?</span>
+            <h2 class="section-heading">Where kindness and polish meet.</h2>
+            <p>
+              We combine meticulous technique with a friendly, boutique experience tailored to your routine. Our eco-forward
+              products, detailed checklists, and joyful energy bring balance to homes of every size.
+            </p>
+            <div class="highlights">
+              <div class="highlight-card">
+                <h3>Trusted by neighbors</h3>
+                <p>
+                  Fully insured and background checked, with glowing referrals from families, professionals, and small business
+                  owners alike.
+                </p>
+              </div>
+              <div class="highlight-card">
+                <h3>Eco-conscious tools</h3>
+                <p>
+                  Thoughtfully selected supplies that are safe for kids, pets, and sensitive surfaces while still delivering a
+                  spotless finish.
+                </p>
+              </div>
+              <div class="highlight-card">
+                <h3>Flexible scheduling</h3>
+                <p>
+                  We work around your lifestyle—mornings, afternoons, or weekends—so your home stays tidy without disrupting
+                  your plans.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" class="booking">
+        <div class="section-inner">
+          <span class="eyebrow">Book a visit</span>
+          <h2 class="section-heading">Ready to plan your sparkling space?</h2>
+          <p class="section-subheading">
+            Choose a service, pick a date on the calendar, and share any special requests. We’ll confirm with a personal note
+            within 24 hours.
+          </p>
+
+          <div class="booking-card">
+            <form aria-label="Book a cleaning appointment">
+              <label>
+                Your Name
+                <input type="text" name="name" placeholder="Raquel Rivera" required />
+              </label>
+              <label>
+                Email Address
+                <input type="email" name="email" placeholder="you@example.com" required />
+              </label>
+              <label>
+                Service Type
+                <select name="service" required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="deep">Deep Cleaning</option>
+                  <option value="light">Light Cleaning</option>
+                  <option value="organize">Organization Needs</option>
+                  <option value="watch">Home Watch</option>
+                </select>
+              </label>
+              <label>
+                Preferred Date
+                <input type="date" name="date" required />
+              </label>
+              <label>
+                Preferred Time
+                <input type="time" name="time" required />
+              </label>
+              <label>
+                Tell us about your home
+                <textarea name="details" placeholder="Share square footage, pets, rooms, or any special priorities..."></textarea>
+              </label>
+              <button type="submit" class="btn primary">Request appointment</button>
+            </form>
+            <div class="booking-visual">
+              <div class="booking-art" role="img" aria-label="Cartoon calendar with highlighted appointment">
+                <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="bookingGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#74c0fc" />
+                      <stop offset="100%" stop-color="#4c6ef5" />
+                    </linearGradient>
+                    <linearGradient id="bookingAccent" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#ffd166" />
+                      <stop offset="100%" stop-color="#f6b93b" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="16" y="16" width="288" height="208" rx="32" fill="url(#bookingGradient)" opacity="0.16" />
+                  <rect x="48" y="52" width="224" height="152" rx="20" fill="#ffffff" />
+                  <path d="M48 92h224" fill="none" stroke="#4c6ef5" stroke-width="6" />
+                  <rect x="72" y="32" width="32" height="40" rx="12" fill="#4c6ef5" />
+                  <rect x="216" y="32" width="32" height="40" rx="12" fill="#4c6ef5" />
+                  <circle cx="96" cy="116" r="10" fill="#a5baff" />
+                  <circle cx="144" cy="116" r="10" fill="#a5baff" />
+                  <circle cx="192" cy="116" r="10" fill="#a5baff" />
+                  <circle cx="240" cy="116" r="10" fill="#a5baff" />
+                  <rect x="96" y="148" width="80" height="44" rx="12" fill="url(#bookingAccent)" />
+                  <path d="M116 164h40" fill="none" stroke="#cc9f3b" stroke-width="6" stroke-linecap="round" />
+                  <path d="M196 148h16v44l-16-12v-32Z" fill="#4c6ef5" opacity="0.25" />
+                  <path d="M88 188a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm168-20a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z" fill="#ffd166" opacity="0.8" />
+                </svg>
+              </div>
+              <div>
+                <h3>Need something sooner?</h3>
+                <p>
+                  Text us at <strong>(555) 321-8765</strong> and we’ll work our magic to find an opening that matches your
+                  schedule.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <span class="eyebrow">Happy homes</span>
+          <h2 class="section-heading">Stories from clients who leave it to Raquel.</h2>
+          <div class="testimonials" role="list">
+            <article class="testimonial" role="listitem">
+              <p>
+                “Raquel turns our busy family chaos into calm every week. The kids love the fresh sheets and the little touches she
+                leaves behind.”
+              </p>
+              <strong>— Jenna M., Estero</strong>
+            </article>
+            <article class="testimonial" role="listitem">
+              <p>
+                “My condo has never felt more zen. The organizing service was a life changer—I actually enjoy being in my office
+                now.”
+              </p>
+              <strong>— Devon P., Fort Myers</strong>
+            </article>
+            <article class="testimonial" role="listitem">
+              <p>
+                “The home watch visits gave us total peace of mind on vacation. Plants watered, packages inside, and a sweet welcome
+                note!”
+              </p>
+              <strong>— Samuel &amp; Priya L., Naples</strong>
+            </article>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      &copy; 2024 Hill Avenue Pathway Learning Module. Built for emerging civil engineers and project managers.
+    <footer id="contact">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand" href="#top">
+              <span>LR</span>
+              Leave it to Raquel
+            </a>
+            <p>
+              Boutique residential cleaning and organization throughout Southwest Florida. Licensed, insured, and always delighted
+              to bring sparkle to your day.
+            </p>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <div class="footer-links">
+              <span><strong>Phone:</strong> (555) 321-8765</span>
+              <span><strong>Email:</strong> hello@leaveittoraquel.com</span>
+              <span><strong>Service Area:</strong> Fort Myers • Naples • Cape Coral</span>
+            </div>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <div class="footer-links">
+              <span>Monday – Friday: 8am – 6pm</span>
+              <span>Saturday: 9am – 2pm</span>
+              <span>Sunday: By special request</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; <span id="year"></span> Leave it to Raquel. All rights reserved.</span>
+          <span>Made with care in Southwest Florida.</span>
+        </div>
+      </div>
     </footer>
+
+    <script>
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+    </script>
   </body>
 </html>
