@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hill Ave Multi-Use Path Project | City of Fort Myers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f7c90;
+      --secondary: #1f3b4d;
+      --accent: #f7a400;
+      --light: #f5f7fa;
+      --dark: #12232e;
+      --text: #2f3e46;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", Arial, sans-serif;
+      color: var(--text);
+      background-color: var(--light);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, rgba(15, 124, 144, 0.95), rgba(18, 35, 46, 0.95)),
+        url("https://images.unsplash.com/photo-1520967849769-85f54eafc7f8?auto=format&fit=crop&w=1400&q=80") center/cover;
+      color: white;
+      padding: 4rem 1.5rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 35, 46, 0.35);
+    }
+
+    header .content {
+      position: relative;
+      max-width: 950px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    header p {
+      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      margin-bottom: 2rem;
+    }
+
+    header .cta {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background-color: var(--accent);
+      color: var(--dark);
+      font-weight: 700;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    header .cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    nav {
+      background: white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 2rem;
+      padding: 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(18, 35, 46, 0.1);
+    }
+
+    nav a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    section {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(31, 59, 77, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(18, 35, 46, 0.15);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    .card p {
+      margin-bottom: 0;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 1.5rem;
+      border-left: 3px solid rgba(15, 124, 144, 0.35);
+    }
+
+    .timeline-event {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .timeline-event::before {
+      content: "";
+      position: absolute;
+      left: -1.76rem;
+      top: 0.25rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(247, 164, 0, 0.2);
+    }
+
+    .highlight {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 14px 40px rgba(31, 59, 77, 0.1);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .highlight img {
+      width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .highlight ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .highlight li {
+      margin-bottom: 1rem;
+      padding-left: 1.75rem;
+      position: relative;
+    }
+
+    .highlight li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .updates {
+      background: var(--dark);
+      color: white;
+    }
+
+    .updates h2 {
+      color: white;
+    }
+
+    .updates .card {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      box-shadow: none;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="top">
+    <div class="content">
+      <h1>Hill Ave Multi-Use Path</h1>
+      <p>Building a safer, greener, and more connected Fort Myers with a new 12-foot-wide multi-use path along Hill Avenue.</p>
+      <a href="#project-overview" class="cta">Explore the Project</a>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#project-overview">Overview</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#engagement">Engagement</a>
+    <a href="#updates">Updates</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="project-overview">
+    <div class="wrapper">
+      <h2>Project Overview</h2>
+      <p>
+        The City of Fort Myers is advancing a multimodal transportation future with a 12-foot-wide, Americans with Disabilities Act (ADA) compliant multi-use path on Hill Avenue. The project will provide a buffered, well-lit space for people who walk, use mobility devices, or ride bicycles while improving stormwater management and landscaping along the corridor.
+      </p>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <h3>Location</h3>
+          <p>Hill Avenue between Colonial Boulevard and Winkler Avenue in central Fort Myers, FL.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Path Width</h3>
+          <p>A continuous 12-foot paved path separated from vehicle traffic by new curbing, landscaped buffers, and lighting.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Project Goals</h3>
+          <p>Enhance neighborhood connectivity, encourage active transportation, and expand safe routes to schools, parks, and employment centers.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrapper">
+      <h2>Project Timeline</h2>
+      <div class="timeline" aria-label="Project timeline">
+        <div class="timeline-event">
+          <h3>Planning &amp; Design | Spring 2024</h3>
+          <p>Finalize engineering plans, coordinate utility adjustments, and secure permits in consultation with neighborhood stakeholders.</p>
+        </div>
+        <div class="timeline-event">
+          <h3>Procurement | Summer 2024</h3>
+          <p>Issue bid documents, select a contractor, and stage construction materials to minimize neighborhood disruptions.</p>
+        </div>
+        <div class="timeline-event">
+          <h3>Construction | Fall 2024 – Spring 2025</h3>
+          <p>Install drainage, lighting, and the 12-foot multi-use path in phases to maintain access for residents and businesses.</p>
+        </div>
+        <div class="timeline-event">
+          <h3>Opening Celebration | Summer 2025</h3>
+          <p>Host a community ribbon cutting with guided rides and walks highlighting the new connections along Hill Avenue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="benefits">
+    <div class="wrapper">
+      <h2>Benefits for Fort Myers</h2>
+      <div class="highlight">
+        <img src="https://images.unsplash.com/photo-1529429617124-aee18520ffb0?auto=format&fit=crop&w=800&q=80" alt="Residents walking and biking along a tree-lined path" />
+        <div>
+          <p>
+            Investing in connected pedestrian walkways and multi-use paths gives Fort Myers residents safer, healthier, and more affordable ways to commute. The Hill Avenue corridor is a vital link between neighborhoods, schools, and employment centers—this project will reduce the need for short car trips, ease congestion, and improve the city's air quality.
+          </p>
+          <ul>
+            <li>Creates a comfortable, protected space for people of all ages and abilities.</li>
+            <li>Supports active commuting options that save households on transportation costs.</li>
+            <li>Encourages walking and biking, improving public health outcomes across the city.</li>
+            <li>Strengthens connections to transit stops, parks, and local businesses.</li>
+            <li>Enhances neighborhood appeal with new lighting, landscaping, and stormwater features.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="engagement">
+    <div class="wrapper">
+      <h2>Community Engagement</h2>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <h3>Public Information Meeting</h3>
+          <p>Join us on May 15, 2024, at the Fort Myers Regional Library to review design updates and ask questions of project engineers.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Pop-Up Outreach</h3>
+          <p>City staff will be on-site along Hill Avenue throughout the summer gathering feedback on access needs, lighting preferences, and landscaping.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Stay Informed</h3>
+          <p>Sign up for email and text alerts to receive construction notices, detour maps, and event invitations.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="updates" class="updates">
+    <div class="wrapper">
+      <h2>Latest Updates</h2>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <h3>April 2, 2024</h3>
+          <p>Conceptual renderings completed and posted for public review. Download them using the project document library below.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>March 14, 2024</h3>
+          <p>Survey crews collected topographic data along Hill Avenue. No lane closures were required during this work.</p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>February 20, 2024</h3>
+          <p>City Council approved the project scope and authorized design funds for the multi-use path.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrapper">
+      <h2>Contact the Project Team</h2>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <h3>Project Manager</h3>
+          <p>Maria Alvarez, P.E.<br />City of Fort Myers Public Works<br /><a href="tel:1232395550123">(239) 555-0123</a><br /><a href="mailto:malvarez@cityftmyers.com">malvarez@cityftmyers.com</a></p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Public Information Office</h3>
+          <p>Reach us for media inquiries, interview requests, and speaking engagements related to the Hill Avenue project.<br /><a href="mailto:pio@cityftmyers.com">pio@cityftmyers.com</a></p>
+        </article>
+        <article class="card" role="listitem">
+          <h3>Stay Connected</h3>
+          <p>Follow the City of Fort Myers on social media for construction photos, event reminders, and real-time updates.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 City of Fort Myers Public Information Office. <a href="#top">Back to top</a></p>
+  </footer>
+</body>
+</html>
