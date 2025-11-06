@@ -1,392 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hill Ave Multi-Use Path Project | City of Fort Myers</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --primary: #0f7c90;
-      --secondary: #1f3b4d;
-      --accent: #f7a400;
-      --light: #f5f7fa;
-      --dark: #12232e;
-      --text: #2f3e46;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Work Sans", Arial, sans-serif;
-      color: var(--text);
-      background-color: var(--light);
-      line-height: 1.6;
-    }
-
-    header {
-      background: linear-gradient(135deg, rgba(15, 124, 144, 0.95), rgba(18, 35, 46, 0.95)),
-        url("https://images.unsplash.com/photo-1520967849769-85f54eafc7f8?auto=format&fit=crop&w=1400&q=80") center/cover;
-      color: white;
-      padding: 4rem 1.5rem 5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(18, 35, 46, 0.35);
-    }
-
-    header .content {
-      position: relative;
-      max-width: 950px;
-      margin: 0 auto;
-      z-index: 1;
-    }
-
-    header h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    header p {
-      font-size: clamp(1.1rem, 3vw, 1.35rem);
-      margin-bottom: 2rem;
-    }
-
-    header .cta {
-      display: inline-block;
-      padding: 0.85rem 2.5rem;
-      background-color: var(--accent);
-      color: var(--dark);
-      font-weight: 700;
-      border-radius: 2rem;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    header .cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
-    }
-
-    nav {
-      background: white;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem 2rem;
-      padding: 1.25rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 16px rgba(18, 35, 46, 0.1);
-    }
-
-    nav a {
-      color: var(--secondary);
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    section {
-      padding: 3.5rem 1.5rem;
-    }
-
-    .wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.75rem;
-    }
-
-    .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(31, 59, 77, 0.12);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(18, 35, 46, 0.15);
-    }
-
-    .card h3 {
-      color: var(--primary);
-      margin-top: 0;
-    }
-
-    .card p {
-      margin-bottom: 0;
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 1.5rem;
-      border-left: 3px solid rgba(15, 124, 144, 0.35);
-    }
-
-    .timeline-event {
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .timeline-event::before {
-      content: "";
-      position: absolute;
-      left: -1.76rem;
-      top: 0.25rem;
-      width: 0.9rem;
-      height: 0.9rem;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(247, 164, 0, 0.2);
-    }
-
-    .highlight {
-      background: white;
-      padding: 2.5rem;
-      border-radius: 1.25rem;
-      box-shadow: 0 14px 40px rgba(31, 59, 77, 0.1);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .highlight img {
-      width: 100%;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .highlight ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .highlight li {
-      margin-bottom: 1rem;
-      padding-left: 1.75rem;
-      position: relative;
-    }
-
-    .highlight li::before {
-      content: "✔";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .updates {
-      background: var(--dark);
-      color: white;
-    }
-
-    .updates h2 {
-      color: white;
-    }
-
-    .updates .card {
-      background: rgba(255, 255, 255, 0.08);
-      color: white;
-      box-shadow: none;
-    }
-
-    footer {
-      background: var(--secondary);
-      color: white;
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        position: static;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deconstructing the Hill Avenue Pathway Agreement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0a7c8c;
+        --secondary: #114b5f;
+        --accent: #ffc857;
+        --surface: #f5f7fa;
+        --muted: #637381;
+        --text: #1f2933;
+        --background: #ffffff;
       }
-    }
-  </style>
-</head>
-<body>
-  <header id="top">
-    <div class="content">
-      <h1>Hill Ave Multi-Use Path</h1>
-      <p>Building a safer, greener, and more connected Fort Myers with a new 12-foot-wide multi-use path along Hill Avenue.</p>
-      <a href="#project-overview" class="cta">Explore the Project</a>
-    </div>
-  </header>
 
-  <nav>
-    <a href="#project-overview">Overview</a>
-    <a href="#timeline">Timeline</a>
-    <a href="#benefits">Benefits</a>
-    <a href="#engagement">Engagement</a>
-    <a href="#updates">Updates</a>
-    <a href="#contact">Contact</a>
-  </nav>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-  <section id="project-overview">
-    <div class="wrapper">
-      <h2>Project Overview</h2>
-      <p>
-        The City of Fort Myers is advancing a multimodal transportation future with a 12-foot-wide, Americans with Disabilities Act (ADA) compliant multi-use path on Hill Avenue. The project will provide a buffered, well-lit space for people who walk, use mobility devices, or ride bicycles while improving stormwater management and landscaping along the corridor.
-      </p>
-      <div class="cards" role="list">
-        <article class="card" role="listitem">
-          <h3>Location</h3>
-          <p>Hill Avenue between Colonial Boulevard and Winkler Avenue in central Fort Myers, FL.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Path Width</h3>
-          <p>A continuous 12-foot paved path separated from vehicle traffic by new curbing, landscaped buffers, and lighting.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Project Goals</h3>
-          <p>Enhance neighborhood connectivity, encourage active transportation, and expand safe routes to schools, parks, and employment centers.</p>
-        </article>
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background: var(--surface);
+        line-height: 1.7;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", Georgia, serif;
+        color: var(--secondary);
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 5vw, 3.4rem);
+        letter-spacing: 0.04em;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 2.6rem);
+      }
+
+      h3 {
+        font-size: clamp(1.4rem, 3vw, 1.65rem);
+      }
+
+      p {
+        margin: 0 0 1.1rem;
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(120deg, rgba(17, 75, 95, 0.92), rgba(10, 124, 140, 0.92)),
+          url("https://images.unsplash.com/photo-1536148935331-408321065b18?auto=format&fit=crop&w=1600&q=80") center/cover;
+        color: white;
+        padding: 5rem 1.5rem 6rem;
+        text-align: center;
+      }
+
+      .hero .intro {
+        max-width: 920px;
+        margin: 0 auto;
+      }
+
+      .hero p {
+        font-size: clamp(1.1rem, 2.3vw, 1.3rem);
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        background: white;
+        padding: 1.25rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 6px 16px rgba(17, 75, 95, 0.08);
+      }
+
+      nav a {
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 0.92rem;
+        color: var(--secondary);
+        transition: color 0.2s ease;
+      }
+
+      nav a:hover,
+      nav a:focus {
+        color: var(--primary);
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .wrapper {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .highlight-grid {
+        display: grid;
+        gap: 1.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        margin-top: 2.5rem;
+      }
+
+      .card {
+        background: var(--background);
+        border-radius: 18px;
+        padding: 1.75rem;
+        box-shadow: 0 18px 35px rgba(17, 75, 95, 0.08);
+        border: 1px solid rgba(10, 124, 140, 0.08);
+      }
+
+      .card h3 {
+        margin-bottom: 0.75rem;
+      }
+
+      .key-facts {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin-top: 2.5rem;
+      }
+
+      .fact {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 1.5rem;
+        border-left: 6px solid var(--accent);
+        box-shadow: 0 10px 24px rgba(17, 75, 95, 0.08);
+      }
+
+      .fact strong {
+        display: block;
+        font-size: 0.95rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.75rem;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 16px 32px rgba(17, 75, 95, 0.08);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      th,
+      td {
+        padding: 1.15rem 1.25rem;
+        text-align: left;
+      }
+
+      thead {
+        background: rgba(10, 124, 140, 0.12);
+      }
+
+      tbody tr:nth-child(even) {
+        background: rgba(10, 124, 140, 0.04);
+      }
+
+      .scope-grid {
+        display: grid;
+        gap: 1.75rem;
+        margin-top: 2.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .scope-grid .card {
+        border-left: 6px solid var(--primary);
+      }
+
+      .rulebook {
+        margin-top: 2.5rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .rulebook article {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 1.75rem;
+        box-shadow: 0 16px 28px rgba(17, 75, 95, 0.08);
+        border: 1px solid rgba(10, 124, 140, 0.12);
+      }
+
+      .rulebook h3 {
+        margin-bottom: 0.6rem;
+      }
+
+      .forms {
+        margin-top: 2.5rem;
+      }
+
+      .forms-list {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .callout {
+        background: linear-gradient(135deg, rgba(17, 75, 95, 0.95), rgba(10, 124, 140, 0.92));
+        color: white;
+        border-radius: 18px;
+        padding: 2.5rem;
+        margin-top: 3rem;
+        box-shadow: 0 22px 40px rgba(17, 75, 95, 0.22);
+      }
+
+      .callout ol {
+        margin: 1.5rem 0 0;
+        padding-left: 1.25rem;
+      }
+
+      footer {
+        background: var(--secondary);
+        color: rgba(255, 255, 255, 0.85);
+        padding: 1.5rem;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 600px) {
+        nav {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <div class="intro">
+        <h1>Deconstructing a Public Works Project</h1>
+        <p>
+          Welcome, future engineers and project managers. Before the first shovel touches the ground, a public works project is
+          guided by a comprehensive agreement that locks in cost, schedule, and responsibilities. Let’s unpack the Hill Avenue
+          Pathway agreement between the City of Fort Myers and Chris-Tel Construction to see how a multimillion-dollar idea
+          becomes a real pathway.
+        </p>
+        <p>
+          <strong>The Project:</strong> City of Fort Myers Hill Avenue Pathway | <strong>Guaranteed Maximum Price:</strong>
+          $1,341,193.00 | <strong>Parties:</strong> City of Fort Myers (Owner) &amp; Chris-Tel Construction, Inc.
+        </p>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <section id="timeline">
-    <div class="wrapper">
-      <h2>Project Timeline</h2>
-      <div class="timeline" aria-label="Project timeline">
-        <div class="timeline-event">
-          <h3>Planning &amp; Design | Spring 2024</h3>
-          <p>Finalize engineering plans, coordinate utility adjustments, and secure permits in consultation with neighborhood stakeholders.</p>
-        </div>
-        <div class="timeline-event">
-          <h3>Procurement | Summer 2024</h3>
-          <p>Issue bid documents, select a contractor, and stage construction materials to minimize neighborhood disruptions.</p>
-        </div>
-        <div class="timeline-event">
-          <h3>Construction | Fall 2024 – Spring 2025</h3>
-          <p>Install drainage, lighting, and the 12-foot multi-use path in phases to maintain access for residents and businesses.</p>
-        </div>
-        <div class="timeline-event">
-          <h3>Opening Celebration | Summer 2025</h3>
-          <p>Host a community ribbon cutting with guided rides and walks highlighting the new connections along Hill Avenue.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <nav aria-label="Section navigation">
+      <a href="#cost">Project Cost</a>
+      <a href="#scope">Scope of Work</a>
+      <a href="#rules">Assumptions</a>
+      <a href="#paper-trail">Project Forms</a>
+      <a href="#lessons">Key Takeaways</a>
+    </nav>
 
-  <section id="benefits">
-    <div class="wrapper">
-      <h2>Benefits for Fort Myers</h2>
-      <div class="highlight">
-        <img src="https://images.unsplash.com/photo-1529429617124-aee18520ffb0?auto=format&fit=crop&w=800&q=80" alt="Residents walking and biking along a tree-lined path" />
-        <div>
+    <main>
+      <section id="cost">
+        <div class="wrapper">
+          <h2>1. The Big Number: Understanding the Project Cost</h2>
           <p>
-            Investing in connected pedestrian walkways and multi-use paths gives Fort Myers residents safer, healthier, and more affordable ways to commute. The Hill Avenue corridor is a vital link between neighborhoods, schools, and employment centers—this project will reduce the need for short car trips, ease congestion, and improve the city's air quality.
+            The Guaranteed Maximum Price (GMP) caps what the owner will pay for the defined scope of work. Chris-Tel Construction’s
+            commitment ensures that the Hill Avenue Pathway—labor, materials, and overhead—will not exceed $1.34 million.
           </p>
-          <ul>
-            <li>Creates a comfortable, protected space for people of all ages and abilities.</li>
-            <li>Supports active commuting options that save households on transportation costs.</li>
-            <li>Encourages walking and biking, improving public health outcomes across the city.</li>
-            <li>Strengthens connections to transit stops, parks, and local businesses.</li>
-            <li>Enhances neighborhood appeal with new lighting, landscaping, and stormwater features.</li>
-          </ul>
+
+          <div class="key-facts" role="list">
+            <div class="fact" role="listitem">
+              <strong>Project Owner</strong>
+              City of Fort Myers, Florida
+            </div>
+            <div class="fact" role="listitem">
+              <strong>Contractor</strong>
+              Chris-Tel Construction, Inc.
+            </div>
+            <div class="fact" role="listitem">
+              <strong>GMP Cost Estimate</strong>
+              $1,341,193.00
+            </div>
+          </div>
+
+          <p>
+            The Summary GMP Cost Estimate breaks dozens of line items into work categories. Studying these buckets reveals where the
+            dollars go and how the path is built from the ground up.
+          </p>
+
+          <table>
+            <caption class="sr-only">Major work categories and representative costs</caption>
+            <thead>
+              <tr>
+                <th scope="col">Work Category</th>
+                <th scope="col">Key Activities &amp; Costs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Site Preparation &amp; Demolition</td>
+                <td>
+                  Mobilization ($58,799), Traffic Control ($26,429), and Clearing &amp; Grubbing ($16,160) ready the corridor and keep
+                  the public safe before construction begins.
+                </td>
+              </tr>
+              <tr>
+                <td>Earthwork &amp; Paving</td>
+                <td>
+                  Optional Base Group ($110,791), Superpave Asphalt ($70,296), and Concrete Driveways &amp; Sidewalks ($64,660) form the
+                  pathway’s durable surface.
+                </td>
+              </tr>
+              <tr>
+                <td>Landscaping &amp; Irrigation</td>
+                <td>
+                  Sabal Palmetto palms, Clusia Rosea shrubs, Rain Bird RSD-BEX rain sensors, EFB-CP-PRS-D brass master valves, and
+                  nearly 30,000 LF of pressure compensating dripline deliver a resilient streetscape.
+                </td>
+              </tr>
+              <tr>
+                <td>Utilities &amp; Drainage</td>
+                <td>
+                  Connect to the existing irrigation network ($24,227), adjust sanitary sewer manholes ($25,250 + $15,150), and install
+                  new PVC drainage pipe ($21,589) to harmonize with city infrastructure.
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <section id="engagement">
-    <div class="wrapper">
-      <h2>Community Engagement</h2>
-      <div class="cards" role="list">
-        <article class="card" role="listitem">
-          <h3>Public Information Meeting</h3>
-          <p>Join us on May 15, 2024, at the Fort Myers Regional Library to review design updates and ask questions of project engineers.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Pop-Up Outreach</h3>
-          <p>City staff will be on-site along Hill Avenue throughout the summer gathering feedback on access needs, lighting preferences, and landscaping.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Stay Informed</h3>
-          <p>Sign up for email and text alerts to receive construction notices, detour maps, and event invitations.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+      <section id="scope">
+        <div class="wrapper">
+          <h2>2. The Scope of Work: What Are We Actually Building?</h2>
+          <p>
+            The Scope of Work narrates the contractor’s obligations. Organized using the CSI MasterFormat divisions, it defines each
+            discipline that turns Hill Avenue into a complete pedestrian and bicycle corridor.
+          </p>
 
-  <section id="updates" class="updates">
-    <div class="wrapper">
-      <h2>Latest Updates</h2>
-      <div class="cards" role="list">
-        <article class="card" role="listitem">
-          <h3>April 2, 2024</h3>
-          <p>Conceptual renderings completed and posted for public review. Download them using the project document library below.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>March 14, 2024</h3>
-          <p>Survey crews collected topographic data along Hill Avenue. No lane closures were required during this work.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>February 20, 2024</h3>
-          <p>City Council approved the project scope and authorized design funds for the multi-use path.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+          <div class="scope-grid" role="list">
+            <article class="card" role="listitem">
+              <h3>Division 02 — Demolition</h3>
+              <p>
+                Clear the site, remove trees and fencing, and prepare access points exactly as the construction drawings specify.
+              </p>
+            </article>
+            <article class="card" role="listitem">
+              <h3>Division 02 — Surveying</h3>
+              <p>
+                Perform pre-construction surveys, employ ground-penetrating radar to locate underground utilities, and deliver
+                certified as-built documentation when work concludes.
+              </p>
+            </article>
+            <article class="card" role="listitem">
+              <h3>Division 31 — Earthwork</h3>
+              <p>
+                Execute clearing and grubbing, excavation, and embankment operations to establish the correct grades and drainage
+                patterns for the pathway.
+              </p>
+            </article>
+            <article class="card" role="listitem">
+              <h3>Division 32 — Exterior Improvements</h3>
+              <p>
+                Install new wood fencing, signage, asphalt and concrete pavement, pavement markings, extensive landscaping, and the
+                irrigation system—representing the most cost-intensive elements of the project.
+              </p>
+            </article>
+            <article class="card" role="listitem">
+              <h3>Division 33 — Utilities</h3>
+              <p>
+                Adjust stormwater structures and set valve and meter boxes to their final elevations so the new pathway integrates with
+                existing public services.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  <section id="contact">
-    <div class="wrapper">
-      <h2>Contact the Project Team</h2>
-      <div class="cards" role="list">
-        <article class="card" role="listitem">
-          <h3>Project Manager</h3>
-          <p>Maria Alvarez, P.E.<br />City of Fort Myers Public Works<br /><a href="tel:1232395550123">(239) 555-0123</a><br /><a href="mailto:malvarez@cityftmyers.com">malvarez@cityftmyers.com</a></p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Public Information Office</h3>
-          <p>Reach us for media inquiries, interview requests, and speaking engagements related to the Hill Avenue project.<br /><a href="mailto:pio@cityftmyers.com">pio@cityftmyers.com</a></p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Stay Connected</h3>
-          <p>Follow the City of Fort Myers on social media for construction photos, event reminders, and real-time updates.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+      <section id="rules">
+        <div class="wrapper">
+          <h2>3. The Rulebook: Key Assumptions and Exclusions</h2>
+          <p>
+            Qualifications and assumptions allocate risk and clarify expectations before the contract is signed. Each clause protects
+            both parties from surprises and keeps the project moving when conditions change.
+          </p>
 
-  <footer>
-    <p>&copy; 2024 City of Fort Myers Public Information Office. <a href="#top">Back to top</a></p>
-  </footer>
-</body>
+          <div class="rulebook" role="list">
+            <article role="listitem">
+              <h3>1. Price Volatility — 30-Day Validity</h3>
+              <p>
+                The GMP is valid for 30 days. Delays in approval shift the risk of market fluctuations to the owner, incentivizing
+                swift execution while shielding the contractor from escalating material and labor costs.
+              </p>
+            </article>
+            <article role="listitem">
+              <h3>2. Permit Responsibility — Owner’s Duty</h3>
+              <p>
+                City permitting fees are excluded from the contractor’s price. The owner owns the administrative risk, while the
+                contractor focuses on construction risk without absorbing delays in the city’s internal processes.
+              </p>
+            </article>
+            <article role="listitem">
+              <h3>3. Insurance &amp; Bonds — Included in GMP</h3>
+              <p>
+                Builder’s risk insurance and payment/performance bonds are included, protecting public funds, guaranteeing
+                subcontractor payment, and securing completion if the contractor defaults.
+              </p>
+            </article>
+            <article role="listitem">
+              <h3>4. Key Exclusions — Managing Unknowns</h3>
+              <p>
+                Environmental testing, design services, and disposal of unsuitable soils are excluded. Unforeseen conditions, such as
+                unexpected geology, are handled through formal change orders instead of hidden contingencies.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="paper-trail">
+        <div class="wrapper">
+          <h2>4. The Paper Trail: Managing the Project with Essential Forms</h2>
+          <p>
+            Exhibit C of the agreement supplies the templates that guide the project from notice to closeout. Mastering these forms
+            allows project managers to track progress, payments, and accountability with precision.
+          </p>
+
+          <div class="forms">
+            <div class="forms-list" role="list">
+              <article class="card" role="listitem">
+                <h3>Notice of Award</h3>
+                <p>
+                  Issues the official green light to Chris-Tel Construction, triggering the deadlines for bonds, insurance, and
+                  contract execution.
+                </p>
+              </article>
+              <article class="card" role="listitem">
+                <h3>Payment Application</h3>
+                <p>
+                  Standardizes the contractor’s monthly request for compensation tied to completed work and stored materials.
+                </p>
+              </article>
+              <article class="card" role="listitem">
+                <h3>Construction Contract Change Order</h3>
+                <p>
+                  The formal vehicle for modifying scope, cost, or schedule once construction is underway—no change is official without
+                  it.
+                </p>
+              </article>
+              <article class="card" role="listitem">
+                <h3>Certificate of Substantial Completion</h3>
+                <p>
+                  Marks the moment the pathway is safe for public use even if minor punch-list items remain open.
+                </p>
+              </article>
+              <article class="card" role="listitem">
+                <h3>Release of Liens</h3>
+                <p>
+                  Confirms that subcontractors and suppliers have been paid in full, protecting the City from future claims.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lessons">
+        <div class="wrapper">
+          <h2>5. Conclusion: Key Lessons from the Hill Avenue Pathway Project</h2>
+          <div class="callout">
+            <p>
+              A successful civil project is built first on paper and then on the ground. Internalize these lessons as you prepare to
+              lead multidisciplinary teams and navigate the administrative marathon of public works delivery.
+            </p>
+            <ol>
+              <li>
+                <strong>Demand Unambiguous Clarity:</strong> Explicitly define cost, scope, and assumptions to prevent disputes and keep
+                owner and contractor aligned.
+              </li>
+              <li>
+                <strong>Master the Administrative Process:</strong> Treat documentation as the bedrock of transparency and compliance,
+                not bureaucracy.
+              </li>
+              <li>
+                <strong>Proactively Allocate Risk:</strong> Use qualifications and assumptions to decide who owns volatility, permitting
+                delays, and hidden site conditions before construction begins.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      &copy; 2024 Hill Avenue Pathway Learning Module. Built for emerging civil engineers and project managers.
+    </footer>
+  </body>
 </html>
