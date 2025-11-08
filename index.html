@@ -728,7 +728,6 @@
         <div class="nav-container">
           <div class="nav-left">
             <a class="brand" href="#top"><span>CF</span>CFM Utility Locate Tracker</a>
-            <div class="badge" aria-live="polite" id="ticketCount">0 active tickets</div>
           </div>
           <div class="nav-right">
             <div class="user-tag hidden" id="userGreeting"></div>
@@ -835,7 +834,6 @@
           <input type="search" id="searchTickets" placeholder="Search ticket number..." />
           <select id="locatorFilter">
             <option value="all">All locators</option>
-            <option value="unassigned">Unassigned</option>
             <option value="T. Benza">T. Benza</option>
             <option value="L. Schrimer">L. Schrimer</option>
             <option value="J. Juhasz">J. Juhasz</option>
@@ -902,7 +900,6 @@
       const ticketTemplate = document.getElementById("ticketTemplate");
       const searchTickets = document.getElementById("searchTickets");
       const locatorFilter = document.getElementById("locatorFilter");
-      const ticketCount = document.getElementById("ticketCount");
       const statTickets = document.getElementById("statTickets");
       const statAttachments = document.getElementById("statAttachments");
       const statOpen = document.getElementById("statOpen");
@@ -1159,9 +1156,7 @@
         let filtered = tickets.filter((ticket) =>
           ticket.ticketNumber.toLowerCase().includes(searchValue)
         );
-        if (locatorValue === "unassigned") {
-          filtered = filtered.filter((ticket) => !ticket.utilityType);
-        } else if (locatorValue !== "all") {
+        if (locatorValue !== "all") {
           filtered = filtered.filter((ticket) => ticket.utilityType === locatorValue);
         }
 
@@ -1184,7 +1179,6 @@
 
         const attachmentCount = tickets.reduce((sum, ticket) => sum + ticket.attachments.length, 0);
         const openTickets = tickets.filter((ticket) => ticket.status === "open").length;
-        ticketCount.textContent = `${openTickets} active ${openTickets === 1 ? "ticket" : "tickets"}`;
         statTickets.textContent = tickets.length;
         statAttachments.textContent = attachmentCount;
         statOpen.textContent = openTickets;
