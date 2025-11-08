@@ -288,11 +288,22 @@
         margin: 0 auto;
         padding: 0;
         display: grid;
+        gap: clamp(1rem, 3vw, 1.5rem);
         place-items: center;
+        text-align: center;
       }
 
-      .hero-logo img {
-        width: 100%;
+      .hero-wordmark {
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        font-weight: 600;
+        font-size: clamp(2.5rem, 8vw, 4.25rem);
+        color: var(--primary-dark);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .hero-palm {
+        width: clamp(180px, 60vw, 460px);
         height: auto;
         display: block;
       }
@@ -754,13 +765,36 @@
       <main>
       <section class="hero" id="top">
         <div class="hero-content">
-          <figure class="hero-logo">
-            <img
-              src="assets/city-of-fort-myers-crest.svg"
-              alt="City of Fort Myers coat of arms with City of Palms banner"
-              id="heroLogoImage"
-            />
-            <figcaption id="heroLogoDesc" class="sr-only">City of Fort Myers crest logo</figcaption>
+          <figure class="hero-logo" role="group" aria-labelledby="heroLogoDesc">
+            <div class="hero-wordmark">City of Fort Myers</div>
+            <svg
+              class="hero-palm"
+              viewBox="0 0 240 240"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient id="palmFrond" x1="120" y1="36" x2="120" y2="150" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#3ec7c7" />
+                  <stop offset="1" stop-color="#1363df" />
+                </linearGradient>
+                <linearGradient id="palmTrunk" x1="120" y1="140" x2="120" y2="214" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#f6a973" />
+                  <stop offset="1" stop-color="#c06b32" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M120 52c-28 0-45 10-56 24 18-6 33-5 52 4-36-1-56 13-66 33 18-8 38-8 60 2-30 3-46 18-54 36 18-10 38-13 62-5v-18c-2-26 9-52 42-76-16 4-29 13-40 27 9-22 23-38 44-47-14-6-28-8-44-8z"
+                fill="url(#palmFrond)"
+              />
+              <path
+                d="M132 112h-24v16c0 10 4 18 12 24v62h-14c-3 0-6 2-6 5s3 5 6 5h40c3 0 6-2 6-5s-3-5-6-5h-14v-62c8-6 12-14 12-24v-16z"
+                fill="url(#palmTrunk)"
+              />
+            </svg>
+            <figcaption id="heroLogoDesc" class="sr-only">City of Fort Myers wordmark above a stylized palm tree illustration</figcaption>
           </figure>
           <div class="stats" role="list">
             <div class="stat-card" role="listitem">
@@ -772,6 +806,8 @@
               Photos archived
             </div>
           </div>
+        </div>
+      </header>
 
       <section aria-labelledby="formHeading">
         <div class="section-heading">
