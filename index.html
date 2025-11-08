@@ -298,11 +298,10 @@
         place-items: center;
       }
 
-      .hero-logo img {
+      .hero-logo svg {
         display: block;
         width: 100%;
         height: auto;
-        object-fit: contain;
       }
 
       .stats {
@@ -751,8 +750,100 @@
       <main>
       <section class="hero" id="top">
         <div class="hero-content">
-          <figure class="hero-logo">
-            <img src="assets/fort-myers-city-of-palms.svg" alt="Fort Myers City of Palms logo" />
+          <figure class="hero-logo" aria-labelledby="heroLogoTitle heroLogoDesc">
+            <svg
+              class="hero-logo-art"
+              viewBox="0 0 640 280"
+              role="img"
+              aria-labelledby="heroLogoTitle heroLogoDesc"
+            >
+              <title id="heroLogoTitle">City of Fort Myers emblem</title>
+              <desc id="heroLogoDesc">
+                Stylized palm tree illustration with City of Fort Myers lettering inside a rounded banner.
+              </desc>
+              <defs>
+                <linearGradient id="heroLogoBg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f5f8ff" />
+                  <stop offset="100%" stop-color="#e4efff" />
+                </linearGradient>
+                <linearGradient id="heroPalmLeaf" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#37c19f" />
+                  <stop offset="100%" stop-color="#0f8ba7" />
+                </linearGradient>
+                <linearGradient id="heroPalmTrunk" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#c87b2a" />
+                  <stop offset="100%" stop-color="#82451d" />
+                </linearGradient>
+              </defs>
+              <rect x="16" y="18" width="608" height="244" rx="40" fill="url(#heroLogoBg)" />
+              <g transform="translate(0, -6)">
+                <g transform="translate(320 120)">
+                  <g transform="translate(-16, 0)">
+                    <path
+                      d="M16 32 C 4 6, -32 -6, -72 -2 C -32 -30, 20 -22, 44 8 C 58 -8, 94 -18, 124 -4 C 98 -2, 72 16, 60 34 C 86 20, 122 24, 148 48 C 118 48, 88 64, 68 86 C 78 70, 48 52, 28 54 C 36 68, 18 86, -4 94 C 4 80, -12 66, -34 62 C -20 52, -12 40, -18 26 C -6 32, 6 34, 16 32 Z"
+                      fill="url(#heroPalmLeaf)"
+                      opacity="0.9"
+                    />
+                  </g>
+                  <path
+                    d="M12 36 C 6 118, 4 168, 0 240 L 28 240 C 20 166, 16 118, 10 36 Z"
+                    fill="url(#heroPalmTrunk)"
+                  />
+                  <path
+                    d="M18 32 C 30 10, 60 0, 96 6 C 66 -10, 24 -6, 6 20"
+                    fill="none"
+                    stroke="url(#heroPalmLeaf)"
+                    stroke-width="10"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M16 28 C 8 0, -24 -20, -56 -18 C -26 -34, 18 -18, 34 12"
+                    fill="none"
+                    stroke="url(#heroPalmLeaf)"
+                    stroke-width="10"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M14 30 C -12 20, -42 34, -60 56"
+                    fill="none"
+                    stroke="#0f8ba7"
+                    stroke-width="8"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M20 30 C 42 26, 74 44, 96 70"
+                    fill="none"
+                    stroke="#37c19f"
+                    stroke-width="8"
+                    stroke-linecap="round"
+                  />
+                </g>
+              </g>
+              <text
+                x="320"
+                y="120"
+                text-anchor="middle"
+                font-family="'Space Grotesk', 'Inter', sans-serif"
+                font-size="36"
+                letter-spacing="6"
+                fill="#0f4cc3"
+              >
+                CITY OF
+              </text>
+              <text
+                x="320"
+                y="198"
+                text-anchor="middle"
+                font-family="'Space Grotesk', 'Inter', sans-serif"
+                font-size="72"
+                font-weight="600"
+                letter-spacing="8"
+                fill="#0f2856"
+              >
+                FORT MYERS
+              </text>
+              <line x1="160" y1="220" x2="480" y2="220" stroke="#2e6edb" stroke-width="4" stroke-linecap="round" opacity="0.45" />
+            </svg>
           </figure>
           <div class="stats" role="list">
             <div class="stat-card" role="listitem">
