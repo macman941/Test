@@ -553,12 +553,6 @@
         font-weight: 600;
       }
 
-      .ticket-actions {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
       details {
         background: rgba(19, 99, 223, 0.05);
         border-radius: 14px;
@@ -633,9 +627,6 @@
           padding: 1.75rem;
         }
 
-        .ticket-actions {
-          align-items: flex-start;
-        }
       }
     </style>
   </head>
@@ -835,17 +826,22 @@
         <div class="section-heading">
           <div>
             <h2 id="ticketsHeading">Ticket archive</h2>
-            <p>Search by ticket number, filter by status, and review attachments for each locate request.</p>
+            <p>Search by ticket number, filter by locator, and review attachments for each locate request.</p>
           </div>
           <button class="btn-secondary" type="button" id="exportBtn">Export data</button>
         </div>
 
         <div class="tickets-toolbar">
           <input type="search" id="searchTickets" placeholder="Search ticket number..." />
-          <select id="statusFilter">
-            <option value="all">All tickets</option>
-            <option value="open">Open</option>
-            <option value="completed">Completed</option>
+          <select id="locatorFilter">
+            <option value="all">All locators</option>
+            <option value="unassigned">Unassigned</option>
+            <option value="T. Benza">T. Benza</option>
+            <option value="L. Schrimer">L. Schrimer</option>
+            <option value="J. Juhasz">J. Juhasz</option>
+            <option value="S. Lee">S. Lee</option>
+            <option value="M. Lam">M. Lam</option>
+            <option value="S. McDonald">S. McDonald</option>
           </select>
         </div>
 
@@ -863,9 +859,6 @@
               <span data-due></span>
             </div>
           </header>
-          <div class="ticket-actions">
-            <span class="badge" data-status-badge></span>
-          </div>
           <details>
             <summary>Notes & photos</summary>
             <div class="details-body">
@@ -908,7 +901,7 @@
       const ticketsContainer = document.getElementById("ticketsContainer");
       const ticketTemplate = document.getElementById("ticketTemplate");
       const searchTickets = document.getElementById("searchTickets");
-      const statusFilter = document.getElementById("statusFilter");
+      const locatorFilter = document.getElementById("locatorFilter");
       const ticketCount = document.getElementById("ticketCount");
       const statTickets = document.getElementById("statTickets");
       const statAttachments = document.getElementById("statAttachments");
@@ -1162,12 +1155,14 @@
 
       function renderTickets() {
         const searchValue = searchTickets.value.trim().toLowerCase();
-        const statusValue = statusFilter.value;
+        const locatorValue = locatorFilter ? locatorFilter.value : "all";
         let filtered = tickets.filter((ticket) =>
           ticket.ticketNumber.toLowerCase().includes(searchValue)
         );
-        if (statusValue !== "all") {
-          filtered = filtered.filter((ticket) => ticket.status === statusValue);
+        if (locatorValue === "unassigned") {
+          filtered = filtered.filter((ticket) => !ticket.utilityType);
+        } else if (locatorValue !== "all") {
+          filtered = filtered.filter((ticket) => ticket.utilityType === locatorValue);
         }
 
         ticketsContainer.innerHTML = "";
@@ -1204,15 +1199,9 @@
           ? `Locator: ${ticket.utilityType}`
           : "";
         node.querySelector("[data-due]").textContent = ticket.dueDate
-          ? `Due: ${new Date(ticket.dueDate).toLocaleDateString()}`
-          : "No due date";
+          ? `Date: ${new Date(ticket.dueDate).toLocaleDateString()}`
+          : "No date recorded";
         node.querySelector("[data-notes]").textContent = ticket.notes || "No notes recorded.";
-
-        const badge = node.querySelector("[data-status-badge]");
-        badge.textContent = ticket.status === "completed" ? "Completed" : "Open";
-        badge.style.background =
-          ticket.status === "completed" ? "rgba(82, 214, 178, 0.2)" : "rgba(19, 99, 223, 0.1)";
-        badge.style.color = ticket.status === "completed" ? "#127c5c" : "var(--primary-dark)";
 
         const attachmentsWrapper = node.querySelector("[data-attachments]");
         if (!ticket.attachments.length) {
@@ -1258,7 +1247,7 @@
       });
 
       searchTickets.addEventListener("input", renderTickets);
-      statusFilter.addEventListener("change", renderTickets);
+      locatorFilter?.addEventListener("change", renderTickets);
 
       resetFormBtn.addEventListener("click", () => {
         photoPreview.innerHTML = "";
