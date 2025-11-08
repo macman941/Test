@@ -260,21 +260,17 @@
       }
 
       .hero {
-        background: var(--surface);
-        box-shadow: var(--shadow);
-        border-radius: var(--radius-lg);
-        padding: clamp(2.25rem, 5vw, 3.5rem);
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 5vw, 3.5rem);
         position: relative;
         overflow: visible;
         isolation: isolate;
       }
 
       .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at top right, rgba(19, 99, 223, 0.16), transparent 55%);
-        pointer-events: none;
+        content: none;
       }
 
       .hero-content {
@@ -288,10 +284,9 @@
       }
 
       .hero-logo {
-        width: 100%;
-        max-width: clamp(420px, 70vw, 820px);
+        width: min(100%, 900px);
         margin: 0 auto;
-        padding: clamp(1rem, 3vw, 1.75rem);
+        padding: 0;
         display: grid;
         place-items: center;
       }
