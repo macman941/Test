@@ -279,26 +279,38 @@
       .hero-content {
         display: grid;
         gap: clamp(1rem, 3vw, 1.5rem);
-        max-width: 640px;
         position: relative;
         z-index: 1;
+        justify-items: center;
+        text-align: center;
+        width: min(720px, 100%);
       }
 
-      .hero h1 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        line-height: 1.12;
+      .hero-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: clamp(1.5rem, 4vw, 2.75rem);
+        padding: clamp(1.5rem, 4vw, 3rem);
+        box-shadow: 0 24px 48px rgba(19, 99, 223, 0.18);
+        max-width: min(640px, 100%);
+        width: 100%;
+        margin: 0;
       }
 
-      .hero p {
-        font-size: 1.02rem;
-        line-height: 1.6;
+      .hero-logo img {
+        display: block;
+        max-width: 100%;
+        height: auto;
       }
 
       .stats {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-        margin-top: 1.5rem;
+        margin-top: 1rem;
+        justify-content: center;
       }
 
       .stat-card {
@@ -739,12 +751,9 @@
       <main>
       <section class="hero" id="top">
         <div class="hero-content">
-          <h1>Centralize your locate tickets and documentation</h1>
-          <p>
-            Use this lightweight utility locate database to log ticket numbers, capture site details, and attach
-            photos from the field. Everything stays organized, searchable, and exportable so your crews can confirm
-            coverage before they dig.
-          </p>
+          <figure class="hero-logo">
+            <img src="assets/fort-myers-city-of-palms.svg" alt="Fort Myers City of Palms logo" />
+          </figure>
           <div class="stats" role="list">
             <div class="stat-card" role="listitem">
               <strong id="statTickets">0</strong>
