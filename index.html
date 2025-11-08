@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Securely log in to the CFM Utility Locate Tracker to capture locate tickets, upload photos, and review archive records."
+    />
     <title>CFM Utility Locate Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -120,27 +124,41 @@
         color: #9c1d1d;
       }
 
-      .auth-switch {
-        font-size: 0.9rem;
-        color: var(--muted);
+      .auth-toggle {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.4rem;
+        padding: 0.35rem;
+        border-radius: 14px;
+        background: rgba(19, 99, 223, 0.08);
       }
 
-      .auth-link {
-        background: none !important;
-        border: none !important;
-        color: var(--primary-dark);
+      .auth-toggle-btn {
+        border: none;
+        background: none;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
         font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--muted);
         cursor: pointer;
-        padding: 0 !important;
-        text-decoration: underline;
-        display: inline !important;
-        box-shadow: none !important;
+        transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
       }
 
-      .auth-link:hover,
-      .auth-link:focus {
-        color: var(--primary);
-        outline: none;
+      .auth-toggle-btn.active {
+        background: var(--surface);
+        color: var(--primary-dark);
+        box-shadow: 0 12px 24px rgba(19, 99, 223, 0.16);
+      }
+
+      .auth-toggle-btn:focus-visible {
+        outline: 2px solid rgba(19, 99, 223, 0.4);
+        outline-offset: 2px;
+      }
+
+      .auth-toggle-btn[disabled] {
+        cursor: not-allowed;
+        opacity: 0.55;
       }
 
       h1,
@@ -632,7 +650,28 @@
           Log in to manage locate tickets, attachments, and onsite documentation in one streamlined workspace.
         </p>
         <div id="authMessage" class="auth-message hidden" role="status" aria-live="polite"></div>
-        <form class="auth-form" id="loginForm" autocomplete="on">
+        <div class="auth-toggle" id="authToggle" role="tablist" aria-label="Authentication options">
+          <button
+            type="button"
+            class="auth-toggle-btn active"
+            id="toggleLogin"
+            role="tab"
+            aria-selected="true"
+          >
+            Existing user
+          </button>
+          <button
+            type="button"
+            class="auth-toggle-btn"
+            id="toggleRegister"
+            role="tab"
+            aria-selected="false"
+          >
+            Create account
+          </button>
+        </div>
+
+        <form class="auth-form" id="loginForm" autocomplete="on" role="tabpanel" aria-labelledby="toggleLogin">
           <label>
             Email address
             <input type="email" id="loginEmail" name="loginEmail" autocomplete="email" required />
@@ -650,7 +689,14 @@
           <button type="submit" class="btn-primary">Sign in</button>
         </form>
 
-        <form class="auth-form hidden" id="registerForm" autocomplete="off">
+        <form
+          class="auth-form hidden"
+          id="registerForm"
+          autocomplete="off"
+          role="tabpanel"
+          aria-labelledby="toggleRegister"
+          aria-hidden="true"
+        >
           <label>
             Full name
             <input type="text" id="registerName" name="registerName" autocomplete="name" required />
@@ -683,15 +729,6 @@
           </label>
           <button type="submit" class="btn-primary">Create account</button>
         </form>
-
-        <p class="auth-switch" id="toRegister">
-          Need to set up access?
-          <button type="button" class="auth-link" id="showRegister">Create team account</button>
-        </p>
-        <p class="auth-switch hidden" id="toLogin">
-          Already have access?
-          <button type="button" class="auth-link" id="showLogin">Back to sign in</button>
-        </p>
       </div>
     </div>
 
@@ -854,10 +891,8 @@
       const authMessage = document.getElementById("authMessage");
       const authLoginForm = document.getElementById("loginForm");
       const authRegisterForm = document.getElementById("registerForm");
-      const showRegisterBtn = document.getElementById("showRegister");
-      const showLoginBtn = document.getElementById("showLogin");
-      const toRegister = document.getElementById("toRegister");
-      const toLogin = document.getElementById("toLogin");
+      const toggleLoginBtn = document.getElementById("toggleLogin");
+      const toggleRegisterBtn = document.getElementById("toggleRegister");
       const loginEmailInput = document.getElementById("loginEmail");
       const loginPasswordInput = document.getElementById("loginPassword");
       const registerNameInput = document.getElementById("registerName");
@@ -945,19 +980,23 @@
         const newUser = { name, email, password: encodePassword(password) };
         users.push(newUser);
         saveUsers();
+        updateAuthToggleAvailability();
         startSession(newUser);
         authRegisterForm.reset();
         clearAuthMessage();
         showApp(newUser);
       });
 
-      showRegisterBtn?.addEventListener("click", () => {
+      toggleRegisterBtn?.addEventListener("click", () => {
         clearAuthMessage();
         setAuthMode("register");
       });
 
-      showLoginBtn?.addEventListener("click", () => {
-        if (!users.length) return;
+      toggleLoginBtn?.addEventListener("click", () => {
+        if (!users.length) {
+          showAuthMessage("Create an account to get started.", "info");
+          return;
+        }
         clearAuthMessage();
         setAuthMode("login");
       });
@@ -996,15 +1035,37 @@
         updateUserUI();
         appShell?.classList.add("hidden");
         authScreen?.classList.remove("hidden");
+        updateAuthToggleAvailability();
         setAuthMode(mode);
       }
 
+      function updateAuthToggleAvailability() {
+        const hasUsers = users.length > 0;
+        if (toggleLoginBtn) {
+          toggleLoginBtn.disabled = !hasUsers;
+          toggleLoginBtn.setAttribute("aria-disabled", String(!hasUsers));
+          toggleLoginBtn.title = hasUsers
+            ? "Sign in to an existing account"
+            : "Create an account to get started";
+        }
+        if (toggleRegisterBtn) {
+          toggleRegisterBtn.title = "Create a new team account";
+        }
+      }
+
       function setAuthMode(mode) {
-        const isLogin = mode === "login";
+        const nextMode = mode === "login" && !users.length ? "register" : mode;
+        const isLogin = nextMode === "login";
         authLoginForm?.classList.toggle("hidden", !isLogin);
         authRegisterForm?.classList.toggle("hidden", isLogin);
-        toRegister?.classList.toggle("hidden", !isLogin);
-        toLogin?.classList.toggle("hidden", isLogin || users.length === 0);
+        authLoginForm?.setAttribute("aria-hidden", isLogin ? "false" : "true");
+        authRegisterForm?.setAttribute("aria-hidden", isLogin ? "true" : "false");
+        toggleLoginBtn?.classList.toggle("active", isLogin);
+        toggleRegisterBtn?.classList.toggle("active", !isLogin);
+        toggleLoginBtn?.setAttribute("aria-selected", String(isLogin));
+        toggleRegisterBtn?.setAttribute("aria-selected", String(!isLogin));
+        toggleLoginBtn?.setAttribute("tabindex", isLogin ? "0" : "-1");
+        toggleRegisterBtn?.setAttribute("tabindex", !isLogin ? "0" : "-1");
         window.requestAnimationFrame(() => {
           if (isLogin) {
             loginEmailInput?.focus();
