@@ -2,25 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leave it to Raquel | Professional House Cleaning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Securely log in to the CFM Utility Locate Tracker to capture locate tickets, upload photos, and review archive records."
+    />
+    <title>CFM Utility Locate Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fraunces:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --primary: #4c6ef5;
-        --primary-dark: #364fc7;
-        --accent: #f6b93b;
-        --background: #f5f7fb;
-        --card-bg: #ffffff;
-        --text: #1d1f2f;
-        --muted: #6b7280;
-        --radius: 18px;
-        --shadow: 0 20px 45px rgba(76, 110, 245, 0.12);
+        color-scheme: light;
+        --bg: #f3f4f8;
+        --surface: #ffffff;
+        --surface-subtle: rgba(255, 255, 255, 0.65);
+        --primary: #1363df;
+        --primary-dark: #0f4cc3;
+        --accent: #52d6b2;
+        --text: #121625;
+        --muted: #5e6478;
+        --border: rgba(19, 99, 223, 0.12);
+        --radius-lg: 24px;
+        --radius: 16px;
+        --shadow: 0 24px 48px rgba(14, 38, 74, 0.12);
       }
 
       *,
@@ -31,693 +39,1278 @@
 
       body {
         margin: 0;
-        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, rgba(19, 99, 223, 0.18), transparent 60%), var(--bg);
         color: var(--text);
-        background: var(--background);
-        line-height: 1.7;
+        min-height: 100vh;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .auth-screen {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: clamp(2rem, 6vw, 4rem);
+      }
+
+      .auth-card {
+        width: min(100%, 460px);
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        padding: clamp(2.2rem, 6vw, 3.2rem);
+        display: grid;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .auth-brand {
+        display: grid;
+        gap: 0.9rem;
+        justify-items: center;
+      }
+
+      .auth-brand span {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.35rem;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary), #48a9f8);
+        box-shadow: 0 18px 36px rgba(19, 99, 223, 0.28);
+      }
+
+      .auth-subtitle {
+        font-size: 0.98rem;
+        color: var(--muted);
+      }
+
+      .auth-form {
+        display: grid;
+        gap: 1rem;
+        text-align: left;
+      }
+
+      .auth-form button {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .auth-message {
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        font-size: 0.92rem;
+        text-align: left;
+      }
+
+      .auth-message.info {
+        background: rgba(19, 99, 223, 0.08);
+        color: var(--primary-dark);
+      }
+
+      .auth-message.success {
+        background: rgba(82, 214, 178, 0.18);
+        color: #106e52;
+      }
+
+      .auth-message.error {
+        background: rgba(232, 94, 94, 0.15);
+        color: #9c1d1d;
+      }
+
+      .auth-toggle {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.4rem;
+        padding: 0.35rem;
+        border-radius: 14px;
+        background: rgba(19, 99, 223, 0.08);
+      }
+
+      .auth-toggle-btn {
+        border: none;
+        background: none;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--muted);
+        cursor: pointer;
+        transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .auth-toggle-btn.active {
+        background: var(--surface);
+        color: var(--primary-dark);
+        box-shadow: 0 12px 24px rgba(19, 99, 223, 0.16);
+      }
+
+      .auth-toggle-btn:focus-visible {
+        outline: 2px solid rgba(19, 99, 223, 0.4);
+        outline-offset: 2px;
+      }
+
+      .auth-toggle-btn[disabled] {
+        cursor: not-allowed;
+        opacity: 0.55;
       }
 
       h1,
       h2,
       h3 {
-        font-family: "Fraunces", "Poppins", sans-serif;
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        font-weight: 600;
         margin: 0;
         color: var(--text);
       }
 
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
+      p {
+        margin: 0;
+        color: var(--muted);
       }
 
       header {
         position: sticky;
         top: 0;
         z-index: 20;
-        backdrop-filter: blur(14px);
-        background: rgba(245, 247, 251, 0.9);
-        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+        backdrop-filter: blur(16px);
+        background: rgba(243, 244, 248, 0.88);
+        border-bottom: 1px solid var(--border);
       }
 
-      nav {
-        max-width: 1160px;
+      .nav-container {
+        max-width: 1120px;
         margin: 0 auto;
-        padding: 1rem clamp(1.2rem, 5vw, 2.5rem);
+        padding: 1.1rem clamp(1rem, 4vw, 2.5rem);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
+        justify-content: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        text-align: center;
+        position: relative;
+      }
+
+      .nav-left {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.35rem;
+        flex-wrap: wrap;
       }
 
       .brand {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 0.7rem;
-        font-weight: 600;
-        font-size: 1.1rem;
-        letter-spacing: 0.04em;
+        gap: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
         color: var(--primary-dark);
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .nav-right {
+        position: absolute;
+        right: clamp(1rem, 4vw, 2.5rem);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .user-tag {
+        background: rgba(18, 22, 37, 0.08);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .logout-btn {
+        padding: 0.55rem 1.15rem;
       }
 
       .brand span {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        font-weight: 700;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.25rem;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary), #48a9f8);
+        box-shadow: 0 14px 28px rgba(19, 99, 223, 0.32);
       }
 
-      .nav-links {
-        display: flex;
-        gap: clamp(1rem, 4vw, 2rem);
-        font-weight: 500;
-        color: var(--muted);
-      }
-
-      .nav-links a {
-        position: relative;
-        padding-bottom: 0.35rem;
-      }
-
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 3px;
-        width: 100%;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.2s ease;
-      }
-
-      .nav-links a:hover::after,
-      .nav-links a:focus-visible::after {
-        transform: scaleX(1);
+      main {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 2.75rem) 4rem;
+        display: grid;
+        gap: clamp(2rem, 5vw, 3.5rem);
       }
 
       .hero {
-        padding: clamp(4rem, 7vw, 6rem) clamp(1.4rem, 5vw, 2.5rem) 0;
-      }
-
-      .hero-inner {
-        max-width: 1160px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        align-items: center;
-        gap: clamp(2rem, 6vw, 4rem);
-        padding: clamp(2.5rem, 6vw, 4rem);
-        background: linear-gradient(145deg, rgba(76, 110, 245, 0.12), rgba(54, 79, 199, 0.09));
-        border-radius: clamp(24px, 5vw, 36px);
+        background: var(--surface);
         box-shadow: var(--shadow);
-      }
-
-      .hero-copy h1 {
-        font-size: clamp(2.4rem, 5vw, 3.8rem);
-        line-height: 1.15;
-      }
-
-      .hero-copy p {
-        margin: 1.2rem 0 2rem;
-        color: var(--muted);
-        font-size: clamp(1rem, 2.5vw, 1.1rem);
-      }
-
-      .cta-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 0.95rem 1.8rem;
-        border-radius: 999px;
-        font-weight: 600;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .btn.primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        box-shadow: 0 15px 30px rgba(76, 110, 245, 0.25);
-      }
-
-      .btn.primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 20px 35px rgba(76, 110, 245, 0.3);
-      }
-
-      .btn.secondary {
-        background: white;
-        color: var(--primary-dark);
-        border: 1px solid rgba(76, 110, 245, 0.2);
-      }
-
-      .hero-visual {
+        border-radius: var(--radius-lg);
+        padding: clamp(2.25rem, 5vw, 3.5rem);
         position: relative;
+        overflow: visible;
         isolation: isolate;
       }
 
-      .hero-visual::before {
+      .hero::after {
         content: "";
         position: absolute;
-        inset: -18% -12% -12% -10%;
-        background: radial-gradient(circle at top left, rgba(76, 110, 245, 0.25), transparent 62%);
-        z-index: -1;
-        border-radius: 40px;
-        transform: rotate(-5deg);
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(19, 99, 223, 0.16), transparent 55%);
+        pointer-events: none;
       }
 
-      .hero-visual img {
-        border-radius: clamp(18px, 4vw, 28px);
-        box-shadow: 0 25px 40px rgba(54, 79, 199, 0.22);
+      .hero-content {
+        display: grid;
+        gap: clamp(1rem, 3vw, 1.5rem);
+        position: relative;
+        z-index: 1;
+        justify-items: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .hero-logo {
+        width: 100%;
+        max-width: clamp(420px, 70vw, 820px);
+        margin: 0 auto;
+        padding: clamp(1rem, 3vw, 1.75rem);
+        display: grid;
+        place-items: center;
+      }
+
+      .hero-logo img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+
+      .stat-card {
+        padding: 1.15rem 1.4rem;
+        border-radius: 18px;
+        background: rgba(19, 99, 223, 0.08);
+        color: var(--primary-dark);
+        min-width: 160px;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 1.5rem;
+        margin-bottom: 0.35rem;
       }
 
       section {
-        padding: clamp(3.5rem, 7vw, 5rem) clamp(1.4rem, 5vw, 2.5rem);
-      }
-
-      .section-inner {
-        max-width: 1160px;
-        margin: 0 auto;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.35rem 0.9rem;
-        background: rgba(76, 110, 245, 0.1);
-        color: var(--primary-dark);
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        border-radius: 999px;
-        font-size: 0.78rem;
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        padding: clamp(1.75rem, 5vw, 2.75rem);
+        box-shadow: var(--shadow);
       }
 
       .section-heading {
-        margin: 1rem 0 1.25rem;
-        font-size: clamp(2rem, 4vw, 2.8rem);
-      }
-
-      .section-subheading {
-        color: var(--muted);
-        max-width: 640px;
-      }
-
-      .services-grid {
-        margin-top: 3rem;
-        display: grid;
-        gap: clamp(1.5rem, 4vw, 2.2rem);
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      }
-
-      .service-card {
-        background: var(--card-bg);
-        padding: 2rem;
-        border-radius: var(--radius);
-        box-shadow: 0 16px 35px rgba(15, 23, 42, 0.06);
-        display: grid;
-        gap: 1.1rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .service-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 22px 40px rgba(15, 23, 42, 0.08);
-      }
-
-      .service-card img {
-        height: 120px;
-        object-fit: contain;
-      }
-
-      .service-card h3 {
-        font-size: 1.35rem;
-      }
-
-      .highlights {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: clamp(1.5rem, 4vw, 2.5rem);
-        margin-top: 3rem;
-      }
-
-      .highlight-card {
-        padding: 1.8rem;
-        border-radius: var(--radius);
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(247, 250, 255, 0.8));
-        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.05);
-        border: 1px solid rgba(76, 110, 245, 0.08);
-      }
-
-      .highlight-card h3 {
-        font-size: 1.25rem;
-        margin-bottom: 0.6rem;
-      }
-
-      .about {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: clamp(2rem, 5vw, 4rem);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
         align-items: center;
+        margin-bottom: clamp(1.5rem, 4vw, 2rem);
       }
 
-      .about figure {
-        margin: 0;
+      .section-heading p {
+        max-width: 520px;
       }
 
-      .about figure img {
-        border-radius: clamp(20px, 5vw, 32px);
-        box-shadow: 0 25px 45px rgba(76, 110, 245, 0.2);
-      }
-
-      .booking {
-        background: linear-gradient(135deg, rgba(76, 110, 245, 0.15), rgba(246, 185, 59, 0.1));
-      }
-
-      .booking-card {
-        margin-top: 3rem;
-        background: var(--card-bg);
-        border-radius: clamp(24px, 5vw, 32px);
-        padding: clamp(2rem, 5vw, 3rem);
-        box-shadow: 0 25px 45px rgba(15, 23, 42, 0.08);
+      .ticket-form {
         display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        align-items: center;
+        gap: 1rem;
       }
 
-      form {
+      .form-grid {
         display: grid;
-        gap: 1.3rem;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
       label {
         display: grid;
-        gap: 0.5rem;
-        font-weight: 500;
+        gap: 0.45rem;
+        font-weight: 600;
+        color: var(--text);
+        font-size: 0.95rem;
       }
 
       input,
-      select,
-      textarea {
-        padding: 0.9rem 1rem;
-        border-radius: 14px;
-        border: 1px solid rgba(76, 110, 245, 0.25);
-        background: #fdfdff;
-        font-family: inherit;
-        font-size: 1rem;
-        color: var(--text);
-        transition: border 0.2s ease, box-shadow 0.2s ease;
+      textarea,
+      select {
+        font: inherit;
+        padding: 0.75rem 0.85rem;
+        border-radius: 12px;
+        border: 1px solid rgba(18, 22, 37, 0.12);
+        background: rgba(255, 255, 255, 0.96);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
       input:focus,
-      select:focus,
-      textarea:focus {
+      textarea:focus,
+      select:focus {
         outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.2);
+        border-color: rgba(19, 99, 223, 0.5);
+        box-shadow: 0 0 0 3px rgba(19, 99, 223, 0.12);
       }
 
       textarea {
-        min-height: 130px;
         resize: vertical;
+        min-height: 120px;
       }
 
-      .booking-visual {
-        background: rgba(76, 110, 245, 0.08);
-        border-radius: clamp(18px, 4vw, 28px);
-        padding: clamp(1.5rem, 3vw, 2.5rem);
+      .file-input {
+        border: 1px dashed rgba(19, 99, 223, 0.45);
+        background: rgba(19, 99, 223, 0.06);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        color: var(--muted);
+        cursor: pointer;
+        transition: background 0.2s ease, border 0.2s ease;
+      }
+
+      .file-input:hover,
+      .file-input:focus-within {
+        background: rgba(19, 99, 223, 0.1);
+        border-color: rgba(19, 99, 223, 0.9);
+      }
+
+      .file-input input[type="file"] {
+        border: 0;
+        padding: 0.25rem;
+        border-radius: 8px;
+        background: transparent;
+        margin: 0 auto;
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: flex-end;
+      }
+
+      button {
+        font: inherit;
+        border-radius: 12px;
+        border: none;
+        padding: 0.75rem 1.4rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #fff;
+        box-shadow: 0 16px 32px rgba(19, 99, 223, 0.28);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 36px rgba(19, 99, 223, 0.35);
+      }
+
+      .btn-secondary {
+        background: rgba(18, 22, 37, 0.08);
+        color: var(--text);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(18, 22, 37, 0.12);
+      }
+
+      .photo-preview {
         display: grid;
-        gap: 1rem;
-        align-items: start;
-        box-shadow: inset 0 0 0 1px rgba(76, 110, 245, 0.12);
-      }
-
-      .booking-visual img {
-        border-radius: clamp(14px, 3vw, 20px);
-        box-shadow: 0 20px 35px rgba(54, 79, 199, 0.2);
-      }
-
-      .testimonials {
-        background: var(--card-bg);
-        border-radius: clamp(22px, 5vw, 30px);
-        box-shadow: 0 25px 45px rgba(15, 23, 42, 0.08);
-        padding: clamp(2.5rem, 5vw, 3.5rem);
-        margin-top: 3rem;
-        display: grid;
-        gap: clamp(1.5rem, 4vw, 2.5rem);
-      }
-
-      .testimonial {
-        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 0.8rem;
       }
 
-      .testimonial p {
-        font-size: 1.05rem;
+      .photo-card {
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(19, 99, 223, 0.08);
+        border: 1px solid rgba(19, 99, 223, 0.18);
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+      }
+
+      .photo-card span {
+        display: block;
+        padding: 0.55rem 0.75rem 0.7rem;
+        font-size: 0.85rem;
         color: var(--muted);
-        margin: 0;
+        background: rgba(255, 255, 255, 0.85);
       }
 
-      .testimonial strong {
-        color: var(--primary-dark);
-      }
-
-      footer {
-        background: #0f172a;
-        color: rgba(255, 255, 255, 0.85);
-        padding: 3rem clamp(1.4rem, 5vw, 2.5rem);
-      }
-
-      .footer-inner {
-        max-width: 1160px;
-        margin: 0 auto;
-        display: grid;
-        gap: clamp(2rem, 4vw, 3rem);
-      }
-
-      .footer-top {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: clamp(2rem, 4vw, 3rem);
-      }
-
-      .footer-brand span {
-        background: rgba(76, 110, 245, 0.15);
-        color: white;
-      }
-
-      .footer-links {
-        display: grid;
-        gap: 0.5rem;
-      }
-
-      .footer-links a {
-        color: rgba(255, 255, 255, 0.75);
-        font-weight: 400;
-      }
-
-      .footer-bottom {
+      .tickets-toolbar {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
+        align-items: center;
         justify-content: space-between;
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 1.5rem;
       }
 
-      @media (max-width: 640px) {
-        nav {
-          flex-direction: column;
-          align-items: flex-start;
+      .tickets-toolbar input {
+        width: min(320px, 100%);
+      }
+
+      .tickets-empty {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--muted);
+      }
+
+      .ticket-grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .ticket-card {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 18px;
+        padding: 1.4rem;
+        border: 1px solid rgba(18, 22, 37, 0.06);
+        display: grid;
+        gap: 1.1rem;
+        position: relative;
+      }
+
+      .ticket-card header {
+        background: none;
+        border: 0;
+        position: static;
+        padding: 0;
+      }
+
+      .ticket-card h3 {
+        font-size: 1.25rem;
+      }
+
+      .ticket-meta {
+        display: grid;
+        gap: 0.55rem;
+        font-size: 0.92rem;
+      }
+
+      .ticket-meta span {
+        color: var(--muted);
+      }
+
+      .attachment-thumbs {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .attachment-thumbs img {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        object-fit: cover;
+        border: 1px solid rgba(19, 99, 223, 0.25);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: rgba(19, 99, 223, 0.1);
+        color: var(--primary-dark);
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      details {
+        background: rgba(19, 99, 223, 0.05);
+        border-radius: 14px;
+        padding: 0.9rem 1rem;
+      }
+
+      details summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--primary-dark);
+        list-style: none;
+      }
+
+      details[open] summary::after {
+        content: "";
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .details-body {
+        margin-top: 0.85rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      dialog {
+        border: none;
+        border-radius: 18px;
+        padding: 0;
+        box-shadow: 0 20px 50px rgba(12, 27, 51, 0.45);
+        background: rgba(10, 15, 28, 0.85);
+      }
+
+      dialog::backdrop {
+        background: rgba(5, 8, 15, 0.55);
+      }
+
+      @media (max-width: 720px) {
+        header {
+          position: static;
         }
 
-        .nav-links {
-          width: 100%;
-          justify-content: space-between;
+        .nav-container {
+          justify-content: center;
+          gap: 0.9rem;
         }
+
+        .nav-left {
+          width: 100%;
+          justify-content: center;
+          gap: 0.9rem;
+        }
+
+        .brand {
+          justify-content: center;
+        }
+
+        .nav-right {
+          position: static;
+          width: 100%;
+          justify-content: center;
+        }
+
+        .badge {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .hero {
+          padding: 1.75rem;
+        }
+
       }
     </style>
   </head>
   <body>
-    <header>
-      <nav aria-label="Primary">
-        <a class="brand" href="#top">
-          <span>LR</span>
-          Leave it to Raquel
-        </a>
-        <div class="nav-links">
-          <a href="#services">Services</a>
-          <a href="#about">Why Us</a>
-          <a href="#booking">Book</a>
-          <a href="#contact">Contact</a>
+    <div class="auth-screen" id="authScreen">
+      <div class="auth-card" role="region" aria-labelledby="authTitle">
+        <div class="auth-brand">
+          <span>CF</span>
+          <h1 id="authTitle">CFM Utility Locate Tracker</h1>
         </div>
-      </nav>
-    </header>
+        <p class="auth-subtitle">
+          Log in to manage locate tickets, attachments, and onsite documentation in one streamlined workspace.
+        </p>
+        <div id="authMessage" class="auth-message hidden" role="status" aria-live="polite"></div>
+        <div class="auth-toggle" id="authToggle" role="tablist" aria-label="Authentication options">
+          <button
+            type="button"
+            class="auth-toggle-btn active"
+            id="toggleLogin"
+            role="tab"
+            aria-selected="true"
+          >
+            Existing user
+          </button>
+          <button
+            type="button"
+            class="auth-toggle-btn"
+            id="toggleRegister"
+            role="tab"
+            aria-selected="false"
+          >
+            Create account
+          </button>
+        </div>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <span class="eyebrow">Pristine Homes, Joyful Living</span>
-            <h1>Modern cleaning crafted with warmth &amp; care.</h1>
-            <p>
-              Leave it to Raquel delivers vibrant, detail-obsessed cleaning and organizing services for busy families in our
-              community. Experience a sparkling home filled with calm so you can focus on what truly matters.
-            </p>
-            <div class="cta-group">
-              <a class="btn primary" href="#booking">Book a visit</a>
-              <a class="btn secondary" href="#services">Explore services</a>
-            </div>
-          </div>
-          <div class="hero-visual" aria-hidden="true">
-            <img
-              src="https://illustrations.popsy.co/amber/cleaning-lady.svg"
-              alt="Cartoon style illustration of a cheerful cleaner"
+        <form class="auth-form" id="loginForm" autocomplete="on" role="tabpanel" aria-labelledby="toggleLogin">
+          <label>
+            Email address
+            <input type="email" id="loginEmail" name="loginEmail" autocomplete="email" required />
+          </label>
+          <label>
+            Access password
+            <input
+              type="password"
+              id="loginPassword"
+              name="loginPassword"
+              autocomplete="current-password"
+              required
             />
-          </div>
-        </div>
-      </section>
+          </label>
+          <button type="submit" class="btn-primary">Sign in</button>
+        </form>
 
-      <section id="services">
-        <div class="section-inner">
-          <span class="eyebrow">Services</span>
-          <h2 class="section-heading">Every space deserves a custom shine.</h2>
-          <p class="section-subheading">
-            Whether you need a one-time reset or ongoing support, Leave it to Raquel brings meticulous attention to every nook
-            and a splash of personality to every visit.
-          </p>
-
-          <div class="services-grid" role="list">
-            <article class="service-card" role="listitem">
-              <img src="https://illustrations.popsy.co/amber/cleaning-essentials.svg" alt="Illustration of deep cleaning" />
-              <h3>Deep Cleaning</h3>
-              <p>
-                Comprehensive top-to-bottom detailing that revives kitchens, baths, baseboards, and forgotten corners so your
-                home feels freshly renewed.
-              </p>
-            </article>
-            <article class="service-card" role="listitem">
-              <img src="https://illustrations.popsy.co/amber/cleaning-spray.svg" alt="Illustration of light cleaning" />
-              <h3>Light Cleaning</h3>
-              <p>
-                Consistent upkeep with weekly or bi-weekly visits covering dusting, surfaces, floors, and general tidying to
-                maintain everyday sparkle.
-              </p>
-            </article>
-            <article class="service-card" role="listitem">
-              <img src="https://illustrations.popsy.co/amber/organize.svg" alt="Illustration of organization" />
-              <h3>Organization Needs</h3>
-              <p>
-                Personalized decluttering sessions, aesthetic organizing, and seasonal resets that transform busy spaces into
-                calming sanctuaries.
-              </p>
-            </article>
-            <article class="service-card" role="listitem">
-              <img src="https://illustrations.popsy.co/amber/calendar.svg" alt="Illustration of home watch" />
-              <h3>Home Watch</h3>
-              <p>
-                Trusted check-ins while you’re away. We water plants, collect mail, and make sure your home is welcoming upon
-                your return.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="about">
-        <div class="section-inner about">
-          <figure aria-hidden="true">
-            <img
-              src="https://illustrations.popsy.co/amber/cleaning-tools.svg"
-              alt="Cartoon style illustration of professional cleaning tools"
+        <form
+          class="auth-form hidden"
+          id="registerForm"
+          autocomplete="off"
+          role="tabpanel"
+          aria-labelledby="toggleRegister"
+          aria-hidden="true"
+        >
+          <label>
+            Full name
+            <input type="text" id="registerName" name="registerName" autocomplete="name" required />
+          </label>
+          <label>
+            Email address
+            <input type="email" id="registerEmail" name="registerEmail" autocomplete="email" required />
+          </label>
+          <label>
+            Create password
+            <input
+              type="password"
+              id="registerPassword"
+              name="registerPassword"
+              autocomplete="new-password"
+              minlength="6"
+              required
             />
-          </figure>
-          <div>
-            <span class="eyebrow">Why leave it to Raquel?</span>
-            <h2 class="section-heading">Where kindness and polish meet.</h2>
-            <p>
-              We combine meticulous technique with a friendly, boutique experience tailored to your routine. Our eco-forward
-              products, detailed checklists, and joyful energy bring balance to homes of every size.
-            </p>
-            <div class="highlights">
-              <div class="highlight-card">
-                <h3>Trusted by neighbors</h3>
-                <p>
-                  Fully insured and background checked, with glowing referrals from families, professionals, and small business
-                  owners alike.
-                </p>
-              </div>
-              <div class="highlight-card">
-                <h3>Eco-conscious tools</h3>
-                <p>
-                  Thoughtfully selected supplies that are safe for kids, pets, and sensitive surfaces while still delivering a
-                  spotless finish.
-                </p>
-              </div>
-              <div class="highlight-card">
-                <h3>Flexible scheduling</h3>
-                <p>
-                  We work around your lifestyle—mornings, afternoons, or weekends—so your home stays tidy without disrupting
-                  your plans.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="booking" class="booking">
-        <div class="section-inner">
-          <span class="eyebrow">Book a visit</span>
-          <h2 class="section-heading">Ready to plan your sparkling space?</h2>
-          <p class="section-subheading">
-            Choose a service, pick a date on the calendar, and share any special requests. We’ll confirm with a personal note
-            within 24 hours.
-          </p>
-
-          <div class="booking-card">
-            <form aria-label="Book a cleaning appointment">
-              <label>
-                Your Name
-                <input type="text" name="name" placeholder="Raquel Rivera" required />
-              </label>
-              <label>
-                Email Address
-                <input type="email" name="email" placeholder="you@example.com" required />
-              </label>
-              <label>
-                Service Type
-                <select name="service" required>
-                  <option value="" disabled selected>Select a service</option>
-                  <option value="deep">Deep Cleaning</option>
-                  <option value="light">Light Cleaning</option>
-                  <option value="organize">Organization Needs</option>
-                  <option value="watch">Home Watch</option>
-                </select>
-              </label>
-              <label>
-                Preferred Date
-                <input type="date" name="date" required />
-              </label>
-              <label>
-                Preferred Time
-                <input type="time" name="time" required />
-              </label>
-              <label>
-                Tell us about your home
-                <textarea name="details" placeholder="Share square footage, pets, rooms, or any special priorities..."></textarea>
-              </label>
-              <button type="submit" class="btn primary">Request appointment</button>
-            </form>
-            <div class="booking-visual">
-              <img
-                src="https://illustrations.popsy.co/amber/calendar-reminder.svg"
-                alt="Cartoon style illustration of a calendar for booking"
-              />
-              <div>
-                <h3>Need something sooner?</h3>
-                <p>
-                  Text us at <strong>(555) 321-8765</strong> and we’ll work our magic to find an opening that matches your
-                  schedule.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-inner">
-          <span class="eyebrow">Happy homes</span>
-          <h2 class="section-heading">Stories from clients who leave it to Raquel.</h2>
-          <div class="testimonials" role="list">
-            <article class="testimonial" role="listitem">
-              <p>
-                “Raquel turns our busy family chaos into calm every week. The kids love the fresh sheets and the little touches she
-                leaves behind.”
-              </p>
-              <strong>— Jenna M., Estero</strong>
-            </article>
-            <article class="testimonial" role="listitem">
-              <p>
-                “My condo has never felt more zen. The organizing service was a life changer—I actually enjoy being in my office
-                now.”
-              </p>
-              <strong>— Devon P., Fort Myers</strong>
-            </article>
-            <article class="testimonial" role="listitem">
-              <p>
-                “The home watch visits gave us total peace of mind on vacation. Plants watered, packages inside, and a sweet welcome
-                note!”
-              </p>
-              <strong>— Samuel &amp; Priya L., Naples</strong>
-            </article>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer id="contact">
-      <div class="footer-inner">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <a class="brand" href="#top">
-              <span>LR</span>
-              Leave it to Raquel
-            </a>
-            <p>
-              Boutique residential cleaning and organization throughout Southwest Florida. Licensed, insured, and always delighted
-              to bring sparkle to your day.
-            </p>
-          </div>
-          <div>
-            <h3>Contact</h3>
-            <div class="footer-links">
-              <span><strong>Phone:</strong> (555) 321-8765</span>
-              <span><strong>Email:</strong> hello@leaveittoraquel.com</span>
-              <span><strong>Service Area:</strong> Fort Myers • Naples • Cape Coral</span>
-            </div>
-          </div>
-          <div>
-            <h3>Hours</h3>
-            <div class="footer-links">
-              <span>Monday – Friday: 8am – 6pm</span>
-              <span>Saturday: 9am – 2pm</span>
-              <span>Sunday: By special request</span>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <span>&copy; <span id="year"></span> Leave it to Raquel. All rights reserved.</span>
-          <span>Made with care in Southwest Florida.</span>
-        </div>
+          </label>
+          <label>
+            Confirm password
+            <input
+              type="password"
+              id="registerConfirm"
+              name="registerConfirm"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            />
+          </label>
+          <button type="submit" class="btn-primary">Create account</button>
+        </form>
       </div>
-    </footer>
+    </div>
+
+    <div id="appShell" class="hidden">
+      <header>
+        <div class="nav-container">
+          <div class="nav-left">
+            <a class="brand" href="#top"><span>CF</span>CFM Utility Locate Tracker</a>
+          </div>
+          <div class="nav-right">
+            <div class="user-tag hidden" id="userGreeting"></div>
+            <button type="button" class="btn-secondary logout-btn hidden" id="logoutBtn">Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+      <section class="hero" id="top">
+        <div class="hero-content">
+          <figure class="hero-logo">
+            <img src="assets/fort-myers-city-of-palms.svg" alt="Fort Myers City of Palms logo" id="heroLogoImage" />
+            <figcaption id="heroLogoDesc" class="sr-only">Fort Myers City of Palms logo</figcaption>
+          </figure>
+          <div class="stats" role="list">
+            <div class="stat-card" role="listitem">
+              <strong id="statTickets">0</strong>
+              Tickets logged
+            </div>
+            <div class="stat-card" role="listitem">
+              <strong id="statAttachments">0</strong>
+              Photos archived
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="formHeading">
+        <div class="section-heading">
+          <div>
+            <h2 id="formHeading">Create a completed ticket</h2>
+            <p>
+              Enter the ticket details, upload field photos, and include any additional information related to the locate.
+            </p>
+          </div>
+        </div>
+
+        <form class="ticket-form" id="ticketForm">
+          <div class="form-grid">
+            <label>
+              Ticket number
+              <input type="text" name="ticketNumber" id="ticketNumber" required placeholder="e.g. 23-584217" />
+            </label>
+            <label>
+              Job site / address
+              <input type="text" name="location" id="location" placeholder="123 Main St, Springfield" />
+            </label>
+            <label>
+              Locator
+              <select name="utilityType" id="utilityType">
+                <option value="">Select locator</option>
+                <option>T. Benza</option>
+                <option>L. Schrimer</option>
+                <option>J. Juhasz</option>
+                <option>S. Lee</option>
+                <option>M. Lam</option>
+                <option>S. McDonald</option>
+              </select>
+            </label>
+            <label>
+              Date located
+              <input type="date" name="dueDate" id="dueDate" />
+            </label>
+          </div>
+
+          <label>
+            Notes
+            <textarea name="notes" id="notes" placeholder="Flags, obstacles, access notes, and contacts..."></textarea>
+          </label>
+
+          <label class="file-input">
+            <strong>Attach field photos</strong>
+            <span>Upload multiple images to document marks, utilities, and site conditions.</span>
+            <input type="file" id="photos" name="photos" accept="image/*" multiple />
+          </label>
+
+          <div class="photo-preview" id="photoPreview" aria-live="polite"></div>
+
+          <div class="form-actions">
+            <button type="reset" class="btn-secondary" id="resetForm">Clear form</button>
+            <button type="submit" class="btn-primary">Save ticket</button>
+          </div>
+        </form>
+      </section>
+
+      <section aria-labelledby="ticketsHeading">
+        <div class="section-heading">
+          <div>
+            <h2 id="ticketsHeading">Ticket archive</h2>
+            <p>Search by ticket number, filter by locator, and review attachments for each locate request.</p>
+          </div>
+        </div>
+
+        <div class="tickets-toolbar">
+          <input type="search" id="searchTickets" placeholder="Search ticket number..." />
+          <select id="locatorFilter">
+            <option value="all">All locators</option>
+            <option value="T. Benza">T. Benza</option>
+            <option value="L. Schrimer">L. Schrimer</option>
+            <option value="J. Juhasz">J. Juhasz</option>
+            <option value="S. Lee">S. Lee</option>
+            <option value="M. Lam">M. Lam</option>
+            <option value="S. McDonald">S. McDonald</option>
+          </select>
+        </div>
+
+        <div id="ticketsContainer"></div>
+      </section>
+      </main>
+
+      <template id="ticketTemplate">
+        <article class="ticket-card">
+          <header>
+            <h3 data-ticket-number></h3>
+            <div class="ticket-meta">
+              <span data-location></span>
+              <span data-utility></span>
+              <span data-due></span>
+            </div>
+          </header>
+          <details>
+            <summary>Notes & photos</summary>
+            <div class="details-body">
+              <p data-notes></p>
+              <div class="attachment-thumbs" data-attachments></div>
+            </div>
+          </details>
+        </article>
+      </template>
+
+      <dialog id="imageDialog">
+        <img src="" alt="Ticket attachment" id="dialogImage" style="max-width: 90vw; max-height: 80vh" />
+      </dialog>
+    </div>
 
     <script>
-      const yearEl = document.getElementById("year");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
+      const STORAGE_KEY = "utilityLocateTickets_v1";
+      const USERS_KEY = "cfmLocateUsers_v1";
+      const SESSION_KEY = "cfmLocateSession_v1";
+
+      const appShell = document.getElementById("appShell");
+      const authScreen = document.getElementById("authScreen");
+      const authMessage = document.getElementById("authMessage");
+      const authLoginForm = document.getElementById("loginForm");
+      const authRegisterForm = document.getElementById("registerForm");
+      const toggleLoginBtn = document.getElementById("toggleLogin");
+      const toggleRegisterBtn = document.getElementById("toggleRegister");
+      const loginEmailInput = document.getElementById("loginEmail");
+      const loginPasswordInput = document.getElementById("loginPassword");
+      const registerNameInput = document.getElementById("registerName");
+      const registerEmailInput = document.getElementById("registerEmail");
+      const registerPasswordInput = document.getElementById("registerPassword");
+      const registerConfirmInput = document.getElementById("registerConfirm");
+      const userGreeting = document.getElementById("userGreeting");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      const ticketForm = document.getElementById("ticketForm");
+      const photoInput = document.getElementById("photos");
+      const photoPreview = document.getElementById("photoPreview");
+      const ticketsContainer = document.getElementById("ticketsContainer");
+      const ticketTemplate = document.getElementById("ticketTemplate");
+      const searchTickets = document.getElementById("searchTickets");
+      const locatorFilter = document.getElementById("locatorFilter");
+      const statTickets = document.getElementById("statTickets");
+      const statAttachments = document.getElementById("statAttachments");
+      const resetFormBtn = document.getElementById("resetForm");
+      const imageDialog = document.getElementById("imageDialog");
+      const dialogImage = document.getElementById("dialogImage");
+
+      let users = loadUsers();
+      let tickets = loadTickets();
+
+      initializeAuth();
+      renderTickets();
+
+      authLoginForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = normalizeEmail(loginEmailInput?.value || "");
+        const password = loginPasswordInput?.value || "";
+        if (!email || !password) {
+          showAuthMessage("Both email and password are required.", "error");
+          return;
+        }
+
+        const user = findUser(email);
+        if (!user || user.password !== encodePassword(password)) {
+          showAuthMessage("We couldn't match those credentials. Try again.", "error");
+          return;
+        }
+
+        startSession(user);
+        authLoginForm.reset();
+        clearAuthMessage();
+        showApp(user);
+      });
+
+      authRegisterForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = (registerNameInput?.value || "").trim();
+        const email = normalizeEmail(registerEmailInput?.value || "");
+        const password = registerPasswordInput?.value || "";
+        const confirm = registerConfirmInput?.value || "";
+
+        if (!name || !email || !password || !confirm) {
+          showAuthMessage("All fields are required to create an account.", "error");
+          return;
+        }
+
+        if (password.length < 6) {
+          showAuthMessage("Passwords must be at least 6 characters long.", "error");
+          return;
+        }
+
+        if (password !== confirm) {
+          showAuthMessage("Passwords do not match. Please re-enter them.", "error");
+          return;
+        }
+
+        if (findUser(email)) {
+          showAuthMessage("That email already has access. Sign in instead.", "error");
+          setAuthMode("login");
+          if (loginEmailInput) {
+            loginEmailInput.value = email;
+          }
+          loginPasswordInput?.focus();
+          return;
+        }
+
+        const newUser = { name, email, password: encodePassword(password) };
+        users.push(newUser);
+        saveUsers();
+        updateAuthToggleAvailability();
+        startSession(newUser);
+        authRegisterForm.reset();
+        clearAuthMessage();
+        showApp(newUser);
+      });
+
+      toggleRegisterBtn?.addEventListener("click", () => {
+        clearAuthMessage();
+        setAuthMode("register");
+      });
+
+      toggleLoginBtn?.addEventListener("click", () => {
+        if (!users.length) {
+          showAuthMessage("Create an account to get started.", "info");
+          return;
+        }
+        clearAuthMessage();
+        setAuthMode("login");
+      });
+
+      logoutBtn?.addEventListener("click", () => {
+        clearSession();
+        authLoginForm?.reset();
+        authRegisterForm?.reset();
+        showAuth("login", { clearMessage: false });
+        showAuthMessage("You have been signed out.", "info");
+      });
+
+      function initializeAuth() {
+        const sessionEmail = sessionStorage.getItem(SESSION_KEY);
+        if (sessionEmail) {
+          const existingUser = findUser(sessionEmail);
+          if (existingUser) {
+            showApp(existingUser);
+            return;
+          }
+          clearSession();
+        }
+        showAuth(users.length ? "login" : "register");
+      }
+
+      function showApp(user) {
+        updateUserUI(user);
+        authScreen?.classList.add("hidden");
+        appShell?.classList.remove("hidden");
+      }
+
+      function showAuth(mode = users.length ? "login" : "register", { clearMessage = true } = {}) {
+        if (clearMessage) {
+          clearAuthMessage();
+        }
+        updateUserUI();
+        appShell?.classList.add("hidden");
+        authScreen?.classList.remove("hidden");
+        updateAuthToggleAvailability();
+        setAuthMode(mode);
+      }
+
+      function updateAuthToggleAvailability() {
+        const hasUsers = users.length > 0;
+        if (toggleLoginBtn) {
+          toggleLoginBtn.disabled = !hasUsers;
+          toggleLoginBtn.setAttribute("aria-disabled", String(!hasUsers));
+          toggleLoginBtn.title = hasUsers
+            ? "Sign in to an existing account"
+            : "Create an account to get started";
+        }
+        if (toggleRegisterBtn) {
+          toggleRegisterBtn.title = "Create a new team account";
+        }
+      }
+
+      function setAuthMode(mode) {
+        const nextMode = mode === "login" && !users.length ? "register" : mode;
+        const isLogin = nextMode === "login";
+        authLoginForm?.classList.toggle("hidden", !isLogin);
+        authRegisterForm?.classList.toggle("hidden", isLogin);
+        authLoginForm?.setAttribute("aria-hidden", isLogin ? "false" : "true");
+        authRegisterForm?.setAttribute("aria-hidden", isLogin ? "true" : "false");
+        toggleLoginBtn?.classList.toggle("active", isLogin);
+        toggleRegisterBtn?.classList.toggle("active", !isLogin);
+        toggleLoginBtn?.setAttribute("aria-selected", String(isLogin));
+        toggleRegisterBtn?.setAttribute("aria-selected", String(!isLogin));
+        toggleLoginBtn?.setAttribute("tabindex", isLogin ? "0" : "-1");
+        toggleRegisterBtn?.setAttribute("tabindex", !isLogin ? "0" : "-1");
+        window.requestAnimationFrame(() => {
+          if (isLogin) {
+            loginEmailInput?.focus();
+          } else {
+            registerNameInput?.focus();
+          }
+        });
+      }
+
+      function updateUserUI(user = null) {
+        if (!userGreeting || !logoutBtn) return;
+        if (user) {
+          userGreeting.textContent = user.name
+            ? `Signed in as ${user.name}`
+            : `Signed in as ${user.email}`;
+          userGreeting.classList.remove("hidden");
+          logoutBtn.classList.remove("hidden");
+        } else {
+          userGreeting.textContent = "";
+          userGreeting.classList.add("hidden");
+          logoutBtn.classList.add("hidden");
+        }
+      }
+
+      function normalizeEmail(email) {
+        return email.trim().toLowerCase();
+      }
+
+      function encodePassword(password) {
+        try {
+          return btoa(password);
+        } catch (error) {
+          return btoa(unescape(encodeURIComponent(password)));
+        }
+      }
+
+      function loadUsers() {
+        try {
+          const stored = localStorage.getItem(USERS_KEY);
+          if (!stored) return [];
+          const parsed = JSON.parse(stored);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          console.error("Failed to load users", error);
+          return [];
+        }
+      }
+
+      function saveUsers() {
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function findUser(email) {
+        return users.find((user) => user.email === email);
+      }
+
+      function startSession(user) {
+        sessionStorage.setItem(SESSION_KEY, user.email);
+      }
+
+      function clearSession() {
+        sessionStorage.removeItem(SESSION_KEY);
+      }
+
+      function showAuthMessage(message, type = "info") {
+        if (!authMessage) return;
+        authMessage.textContent = message;
+        authMessage.classList.remove("hidden", "info", "error", "success");
+        authMessage.classList.add(type);
+      }
+
+      function clearAuthMessage() {
+        if (!authMessage) return;
+        authMessage.textContent = "";
+        authMessage.classList.add("hidden");
+        authMessage.classList.remove("info", "error", "success");
+      }
+
+      function loadTickets() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (!stored) return [];
+          const parsed = JSON.parse(stored);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          console.error("Failed to load tickets", error);
+          return [];
+        }
+      }
+
+      function saveTickets() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tickets));
+      }
+
+      function renderTickets() {
+        const searchValue = searchTickets.value.trim().toLowerCase();
+        const locatorValue = locatorFilter ? locatorFilter.value : "all";
+        let filtered = tickets.filter((ticket) =>
+          ticket.ticketNumber.toLowerCase().includes(searchValue)
+        );
+        if (locatorValue !== "all") {
+          filtered = filtered.filter((ticket) => ticket.utilityType === locatorValue);
+        }
+
+        ticketsContainer.innerHTML = "";
+
+        if (!filtered.length) {
+          ticketsContainer.innerHTML =
+            '<div class="tickets-empty">No tickets match your filters yet. Create a ticket to get started.</div>';
+        } else {
+          const ticketGrid = document.createElement("div");
+          ticketGrid.className = "ticket-grid";
+          filtered
+            .slice()
+            .sort((a, b) => b.createdAt - a.createdAt)
+            .forEach((ticket) => {
+              ticketGrid.appendChild(createTicketCard(ticket));
+            });
+          ticketsContainer.appendChild(ticketGrid);
+        }
+
+        const attachmentCount = tickets.reduce((sum, ticket) => sum + ticket.attachments.length, 0);
+        statTickets.textContent = tickets.length;
+        statAttachments.textContent = attachmentCount;
+      }
+
+      function createTicketCard(ticket) {
+        const node = ticketTemplate.content.firstElementChild.cloneNode(true);
+        node.dataset.ticketId = ticket.id;
+        node.querySelector("[data-ticket-number]").textContent = `Ticket #${ticket.ticketNumber}`;
+        node.querySelector("[data-location]").textContent = ticket.location || "No site specified";
+        node.querySelector("[data-utility]").textContent = ticket.utilityType
+          ? `Locator: ${ticket.utilityType}`
+          : "";
+        node.querySelector("[data-due]").textContent = ticket.dueDate
+          ? `Date: ${new Date(ticket.dueDate).toLocaleDateString()}`
+          : "No date recorded";
+        node.querySelector("[data-notes]").textContent = ticket.notes || "No notes recorded.";
+
+        const attachmentsWrapper = node.querySelector("[data-attachments]");
+        if (!ticket.attachments.length) {
+          attachmentsWrapper.textContent = "No photos attached.";
+        } else {
+          ticket.attachments.forEach((attachment, index) => {
+            const img = document.createElement("img");
+            img.src = attachment.dataUrl;
+            img.alt = `${ticket.ticketNumber} attachment ${index + 1}`;
+            img.loading = "lazy";
+            img.addEventListener("click", () => openImage(attachment.dataUrl));
+            attachmentsWrapper.appendChild(img);
+          });
+        }
+
+        return node;
+      }
+
+      function openImage(src) {
+        if (!("showModal" in imageDialog)) {
+          window.open(src, "_blank");
+          return;
+        }
+        dialogImage.src = src;
+        imageDialog.showModal();
+      }
+
+      imageDialog?.addEventListener("click", (event) => {
+        if (event.target === imageDialog) {
+          imageDialog.close();
+        }
+      });
+
+      searchTickets.addEventListener("input", renderTickets);
+      locatorFilter?.addEventListener("change", renderTickets);
+
+      resetFormBtn.addEventListener("click", () => {
+        photoPreview.innerHTML = "";
+      });
+
+      photoInput.addEventListener("change", () => {
+        photoPreview.innerHTML = "";
+        const files = Array.from(photoInput.files || []);
+        if (!files.length) {
+          photoPreview.innerHTML = "";
+          return;
+        }
+        files.forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const photoCard = document.createElement("div");
+            photoCard.className = "photo-card";
+            const img = document.createElement("img");
+            img.src = event.target?.result;
+            img.alt = file.name;
+            const caption = document.createElement("span");
+            caption.textContent = file.name;
+            photoCard.append(img, caption);
+            photoPreview.appendChild(photoCard);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      ticketForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(ticketForm);
+        const ticketNumber = (formData.get("ticketNumber") || "").toString().trim();
+        if (!ticketNumber) {
+          alert("Ticket number is required");
+          return;
+        }
+
+        const newTicket = {
+          id: crypto.randomUUID ? crypto.randomUUID() : `ticket-${Date.now()}`,
+          ticketNumber,
+          location: (formData.get("location") || "").toString().trim(),
+          utilityType: (formData.get("utilityType") || "").toString(),
+          dueDate: formData.get("dueDate") || "",
+          notes: (formData.get("notes") || "").toString().trim(),
+          status: "open",
+          createdAt: Date.now(),
+          attachments: await Promise.all(getPhotoAttachments())
+        };
+
+        tickets.push(newTicket);
+        saveTickets();
+        ticketForm.reset();
+        photoPreview.innerHTML = "";
+        renderTickets();
+      });
+
+      function getPhotoAttachments() {
+        const files = Array.from(photoInput.files || []);
+        return files.map((file) =>
+          new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              resolve({
+                name: file.name,
+                dataUrl: event.target?.result,
+                uploadedAt: Date.now()
+              });
+            };
+            reader.readAsDataURL(file);
+          })
+        );
       }
     </script>
   </body>
