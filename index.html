@@ -777,55 +777,57 @@
               </defs>
               <rect x="16" y="18" width="608" height="244" rx="40" fill="url(#heroLogoBg)" />
               <g transform="translate(0, -6)">
-                <g transform="translate(320 120)">
-                  <g transform="translate(-16, 0)">
+                <g transform="translate(320 128)">
+                  <g transform="scale(0.78)">
+                    <g transform="translate(-16, 0)">
+                      <path
+                        d="M16 32 C 4 6, -32 -6, -72 -2 C -32 -30, 20 -22, 44 8 C 58 -8, 94 -18, 124 -4 C 98 -2, 72 16, 60 34 C 86 20, 122 24, 148 48 C 118 48, 88 64, 68 86 C 78 70, 48 52, 28 54 C 36 68, 18 86, -4 94 C 4 80, -12 66, -34 62 C -20 52, -12 40, -18 26 C -6 32, 6 34, 16 32 Z"
+                        fill="url(#heroPalmLeaf)"
+                        opacity="0.9"
+                      />
+                    </g>
                     <path
-                      d="M16 32 C 4 6, -32 -6, -72 -2 C -32 -30, 20 -22, 44 8 C 58 -8, 94 -18, 124 -4 C 98 -2, 72 16, 60 34 C 86 20, 122 24, 148 48 C 118 48, 88 64, 68 86 C 78 70, 48 52, 28 54 C 36 68, 18 86, -4 94 C 4 80, -12 66, -34 62 C -20 52, -12 40, -18 26 C -6 32, 6 34, 16 32 Z"
-                      fill="url(#heroPalmLeaf)"
-                      opacity="0.9"
+                      d="M12 36 C 6 118, 4 168, 0 240 L 28 240 C 20 166, 16 118, 10 36 Z"
+                      fill="url(#heroPalmTrunk)"
+                    />
+                    <path
+                      d="M18 32 C 30 10, 60 0, 96 6 C 66 -10, 24 -6, 6 20"
+                      fill="none"
+                      stroke="url(#heroPalmLeaf)"
+                      stroke-width="10"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M16 28 C 8 0, -24 -20, -56 -18 C -26 -34, 18 -18, 34 12"
+                      fill="none"
+                      stroke="url(#heroPalmLeaf)"
+                      stroke-width="10"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M14 30 C -12 20, -42 34, -60 56"
+                      fill="none"
+                      stroke="#0f8ba7"
+                      stroke-width="8"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M20 30 C 42 26, 74 44, 96 70"
+                      fill="none"
+                      stroke="#37c19f"
+                      stroke-width="8"
+                      stroke-linecap="round"
                     />
                   </g>
-                  <path
-                    d="M12 36 C 6 118, 4 168, 0 240 L 28 240 C 20 166, 16 118, 10 36 Z"
-                    fill="url(#heroPalmTrunk)"
-                  />
-                  <path
-                    d="M18 32 C 30 10, 60 0, 96 6 C 66 -10, 24 -6, 6 20"
-                    fill="none"
-                    stroke="url(#heroPalmLeaf)"
-                    stroke-width="10"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M16 28 C 8 0, -24 -20, -56 -18 C -26 -34, 18 -18, 34 12"
-                    fill="none"
-                    stroke="url(#heroPalmLeaf)"
-                    stroke-width="10"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M14 30 C -12 20, -42 34, -60 56"
-                    fill="none"
-                    stroke="#0f8ba7"
-                    stroke-width="8"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M20 30 C 42 26, 74 44, 96 70"
-                    fill="none"
-                    stroke="#37c19f"
-                    stroke-width="8"
-                    stroke-linecap="round"
-                  />
                 </g>
               </g>
               <text
                 x="320"
-                y="120"
+                y="118"
                 text-anchor="middle"
                 font-family="'Space Grotesk', 'Inter', sans-serif"
-                font-size="36"
-                letter-spacing="6"
+                font-size="28"
+                letter-spacing="5"
                 fill="#0f4cc3"
               >
                 CITY OF
@@ -853,10 +855,6 @@
             <div class="stat-card" role="listitem">
               <strong id="statAttachments">0</strong>
               Photos archived
-            </div>
-            <div class="stat-card" role="listitem">
-              <strong id="statOpen">0</strong>
-              Open locates
             </div>
           </div>
         </div>
@@ -1002,7 +1000,6 @@
       const locatorFilter = document.getElementById("locatorFilter");
       const statTickets = document.getElementById("statTickets");
       const statAttachments = document.getElementById("statAttachments");
-      const statOpen = document.getElementById("statOpen");
       const exportBtn = document.getElementById("exportBtn");
       const resetFormBtn = document.getElementById("resetForm");
       const imageDialog = document.getElementById("imageDialog");
@@ -1278,10 +1275,8 @@
         }
 
         const attachmentCount = tickets.reduce((sum, ticket) => sum + ticket.attachments.length, 0);
-        const openTickets = tickets.filter((ticket) => ticket.status === "open").length;
         statTickets.textContent = tickets.length;
         statAttachments.textContent = attachmentCount;
-        statOpen.textContent = openTickets;
       }
 
       function createTicketCard(ticket) {
