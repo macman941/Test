@@ -1128,7 +1128,7 @@
 
         const attachmentCount = tickets.reduce((sum, ticket) => sum + ticket.attachments.length, 0);
         const openTickets = tickets.filter((ticket) => ticket.status === "open").length;
-        ticketCount.textContent = `${tickets.length} ${tickets.length === 1 ? "ticket" : "tickets"}`;
+        ticketCount.textContent = `${openTickets} active ${openTickets === 1 ? "ticket" : "tickets"}`;
         statTickets.textContent = tickets.length;
         statAttachments.textContent = attachmentCount;
         statOpen.textContent = openTickets;
