@@ -922,7 +922,6 @@
       const locatorFilter = document.getElementById("locatorFilter");
       const statTickets = document.getElementById("statTickets");
       const statAttachments = document.getElementById("statAttachments");
-      const exportBtn = document.getElementById("exportBtn");
       const resetFormBtn = document.getElementById("resetForm");
       const imageDialog = document.getElementById("imageDialog");
       const dialogImage = document.getElementById("dialogImage");
@@ -1244,17 +1243,6 @@
         if (event.target === imageDialog) {
           imageDialog.close();
         }
-      });
-
-      exportBtn.addEventListener("click", () => {
-        const dataStr = JSON.stringify(tickets, null, 2);
-        const blob = new Blob([dataStr], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const anchor = document.createElement("a");
-        anchor.href = url;
-        anchor.download = "utility-locate-tickets.json";
-        anchor.click();
-        URL.revokeObjectURL(url);
       });
 
       searchTickets.addEventListener("input", renderTickets);
