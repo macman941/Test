@@ -405,8 +405,15 @@
         padding: 1.5rem;
         text-align: center;
         color: var(--muted);
-        cursor: pointer;
+        display: grid;
+        gap: 0.9rem;
+        justify-items: center;
         transition: background 0.2s ease, border 0.2s ease;
+      }
+
+      .file-input strong {
+        font-size: 1rem;
+        color: var(--text);
       }
 
       .file-input:hover,
@@ -415,12 +422,38 @@
         border-color: rgba(19, 99, 223, 0.9);
       }
 
-      .file-input input[type="file"] {
+      .file-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: center;
+      }
+
+      .file-trigger {
+        background: rgba(19, 99, 223, 0.16);
+        color: var(--primary-dark);
+        box-shadow: none;
+      }
+
+      .file-trigger:hover {
+        background: rgba(19, 99, 223, 0.24);
+      }
+
+      .file-trigger:focus-visible {
+        outline: 2px solid rgba(19, 99, 223, 0.4);
+        outline-offset: 2px;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
         border: 0;
-        padding: 0.25rem;
-        border-radius: 8px;
-        background: transparent;
-        margin: 0 auto;
       }
 
       .form-actions {
@@ -818,11 +851,29 @@
             <textarea name="notes" id="notes" placeholder="Flags, obstacles, access notes, and contacts..."></textarea>
           </label>
 
-          <label class="file-input">
-            <strong>Attach field photos</strong>
-            <span>Upload multiple images to document marks, utilities, and site conditions.</span>
-            <input type="file" id="photos" name="photos" accept="image/*" multiple />
-          </label>
+          <div class="file-input" role="group" aria-labelledby="photoFieldHeading">
+            <strong id="photoFieldHeading">Attach field photos</strong>
+            <span>Upload images from your device or capture new photos on your phone.</span>
+            <div class="file-actions">
+              <button type="button" class="file-trigger" id="openPhotoPicker">Choose photos</button>
+              <button type="button" class="file-trigger" id="openCameraCapture">Use camera</button>
+            </div>
+            <input
+              type="file"
+              id="photos"
+              name="photos"
+              accept="image/*"
+              multiple
+              class="visually-hidden"
+            />
+            <input
+              type="file"
+              id="photoCapture"
+              accept="image/*"
+              capture="environment"
+              class="visually-hidden"
+            />
+          </div>
 
           <div class="photo-preview" id="photoPreview" aria-live="polite"></div>
 
@@ -908,6 +959,9 @@
       const ticketForm = document.getElementById("ticketForm");
       const photoInput = document.getElementById("photos");
       const photoPreview = document.getElementById("photoPreview");
+      const cameraInput = document.getElementById("photoCapture");
+      const openPhotoPickerBtn = document.getElementById("openPhotoPicker");
+      const openCameraCaptureBtn = document.getElementById("openCameraCapture");
       const ticketsContainer = document.getElementById("ticketsContainer");
       const ticketTemplate = document.getElementById("ticketTemplate");
       const searchTickets = document.getElementById("searchTickets");
@@ -918,11 +972,95 @@
       const imageDialog = document.getElementById("imageDialog");
       const dialogImage = document.getElementById("dialogImage");
 
+      const supportsFileAggregation = (() => {
+        if (typeof DataTransfer === "undefined") {
+          return false;
+        }
+        try {
+          new DataTransfer();
+          return true;
+        } catch (error) {
+          return false;
+        }
+      })();
+      let fallbackPhotoFiles = [];
+      let queuedExistingPhotoFiles = [];
+
       let users = loadUsers();
       let tickets = loadTickets();
 
       initializeAuth();
       renderTickets();
+
+      function getAllPhotoFiles() {
+        if (!photoInput) {
+          return [];
+        }
+        if (supportsFileAggregation) {
+          return Array.from(photoInput.files || []);
+        }
+        return fallbackPhotoFiles.slice();
+      }
+
+      function setAllPhotoFiles(files) {
+        if (!photoInput) {
+          return;
+        }
+        if (supportsFileAggregation) {
+          const transfer = new DataTransfer();
+          files.forEach((file) => transfer.items.add(file));
+          photoInput.files = transfer.files;
+        } else {
+          fallbackPhotoFiles = files.slice();
+        }
+        if (!files.length) {
+          photoInput.value = "";
+        }
+      }
+
+      function appendFilesToPhotoInput(newFiles) {
+        if (!newFiles.length) {
+          return;
+        }
+        const combined = getAllPhotoFiles().concat(newFiles);
+        setAllPhotoFiles(combined);
+        updatePhotoPreview();
+      }
+
+      function updatePhotoPreview() {
+        if (!photoPreview) {
+          return;
+        }
+        photoPreview.innerHTML = "";
+        const files = getAllPhotoFiles();
+        if (!files.length) {
+          return;
+        }
+        files.forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const photoCard = document.createElement("div");
+            photoCard.className = "photo-card";
+            const img = document.createElement("img");
+            img.src = event.target?.result;
+            img.alt = file.name;
+            const caption = document.createElement("span");
+            caption.textContent = file.name;
+            photoCard.append(img, caption);
+            photoPreview.appendChild(photoCard);
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function clearPhotoInputs() {
+        queuedExistingPhotoFiles = [];
+        setAllPhotoFiles([]);
+        if (cameraInput) {
+          cameraInput.value = "";
+        }
+        updatePhotoPreview();
+      }
 
       authLoginForm?.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -1240,32 +1378,46 @@
       searchTickets.addEventListener("input", renderTickets);
       locatorFilter?.addEventListener("change", renderTickets);
 
-      resetFormBtn.addEventListener("click", () => {
-        photoPreview.innerHTML = "";
+      openPhotoPickerBtn?.addEventListener("click", () => {
+        queuedExistingPhotoFiles = getAllPhotoFiles();
+        photoInput?.click();
       });
 
-      photoInput.addEventListener("change", () => {
-        photoPreview.innerHTML = "";
-        const files = Array.from(photoInput.files || []);
+      openCameraCaptureBtn?.addEventListener("click", () => {
+        cameraInput?.click();
+      });
+
+      cameraInput?.addEventListener("change", () => {
+        const files = Array.from(cameraInput.files || []);
         if (!files.length) {
-          photoPreview.innerHTML = "";
           return;
         }
-        files.forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            const photoCard = document.createElement("div");
-            photoCard.className = "photo-card";
-            const img = document.createElement("img");
-            img.src = event.target?.result;
-            img.alt = file.name;
-            const caption = document.createElement("span");
-            caption.textContent = file.name;
-            photoCard.append(img, caption);
-            photoPreview.appendChild(photoCard);
-          };
-          reader.readAsDataURL(file);
-        });
+        appendFilesToPhotoInput(files);
+        cameraInput.value = "";
+      });
+
+      photoInput?.addEventListener("change", () => {
+        const newSelection = Array.from(photoInput.files || []);
+        if (!newSelection.length && queuedExistingPhotoFiles.length) {
+          setAllPhotoFiles(queuedExistingPhotoFiles);
+          queuedExistingPhotoFiles = [];
+          updatePhotoPreview();
+          return;
+        }
+        const combined = queuedExistingPhotoFiles.length
+          ? queuedExistingPhotoFiles.concat(newSelection)
+          : newSelection;
+        setAllPhotoFiles(combined);
+        queuedExistingPhotoFiles = [];
+        updatePhotoPreview();
+      });
+
+      ticketForm.addEventListener("reset", () => {
+        clearPhotoInputs();
+      });
+
+      resetFormBtn?.addEventListener("click", () => {
+        setTimeout(clearPhotoInputs, 0);
       });
 
       ticketForm.addEventListener("submit", async (event) => {
@@ -1292,12 +1444,11 @@
         tickets.push(newTicket);
         saveTickets();
         ticketForm.reset();
-        photoPreview.innerHTML = "";
         renderTickets();
       });
 
       function getPhotoAttachments() {
-        const files = Array.from(photoInput.files || []);
+        const files = getAllPhotoFiles();
         return files.map((file) =>
           new Promise((resolve) => {
             const reader = new FileReader();
