@@ -284,7 +284,7 @@
       }
 
       .hero-logo {
-        width: min(100%, 900px);
+        width: clamp(260px, 85vw, 720px);
         margin: 0 auto;
         padding: 0;
         display: grid;
@@ -755,8 +755,12 @@
       <section class="hero" id="top">
         <div class="hero-content">
           <figure class="hero-logo">
-            <img src="assets/fort-myers-city-of-palms.svg" alt="Fort Myers City of Palms logo" id="heroLogoImage" />
-            <figcaption id="heroLogoDesc" class="sr-only">Fort Myers City of Palms logo</figcaption>
+            <img
+              src="assets/city-of-fort-myers-crest.svg"
+              alt="City of Fort Myers coat of arms with City of Palms banner"
+              id="heroLogoImage"
+            />
+            <figcaption id="heroLogoDesc" class="sr-only">City of Fort Myers crest logo</figcaption>
           </figure>
           <div class="stats" role="list">
             <div class="stat-card" role="listitem">
@@ -768,8 +772,6 @@
               Photos archived
             </div>
           </div>
-        </div>
-      </section>
 
       <section aria-labelledby="formHeading">
         <div class="section-heading">
