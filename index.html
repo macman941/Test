@@ -299,10 +299,25 @@
         place-items: center;
       }
 
-      .hero-logo svg {
-        display: block;
-        width: 100%;
-        height: auto;
+      .hero-wordmark {
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--primary-dark);
+        text-align: center;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
       }
 
       .stats {
@@ -751,87 +766,9 @@
       <main>
       <section class="hero" id="top">
         <div class="hero-content">
-          <figure class="hero-logo" aria-labelledby="heroLogoTitle heroLogoDesc">
-            <svg
-              class="hero-logo-art"
-              viewBox="0 0 880 260"
-              role="img"
-              aria-labelledby="heroLogoTitle heroLogoDesc"
-            >
-              <title id="heroLogoTitle">Fort Myers City of Palms logo</title>
-              <desc id="heroLogoDesc">
-                Fort Myers wordmark with a stylized palm tree between the words and a City of Palms tagline beneath.
-              </desc>
-              <defs>
-                <linearGradient id="heroPalmFronds" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#7cf07d" />
-                  <stop offset="100%" stop-color="#34b86d" />
-                </linearGradient>
-                <linearGradient id="heroPalmFrondsLight" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#a0f3a3" />
-                  <stop offset="100%" stop-color="#58d486" />
-                </linearGradient>
-                <linearGradient id="heroPalmTrunk" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#33b873" />
-                  <stop offset="100%" stop-color="#1f8f5e" />
-                </linearGradient>
-              </defs>
-              <text
-                x="390"
-                y="148"
-                text-anchor="end"
-                font-family="'Space Grotesk', 'Inter', sans-serif"
-                font-size="110"
-                font-weight="700"
-                letter-spacing="8"
-                fill="#0a3f94"
-              >
-                FOR
-              </text>
-              <text
-                x="450"
-                y="148"
-                text-anchor="start"
-                font-family="'Space Grotesk', 'Inter', sans-serif"
-                font-size="110"
-                font-weight="700"
-                letter-spacing="8"
-                fill="#0a3f94"
-              >
-                MYERS
-              </text>
-              <g transform="translate(420 130)">
-                <g fill="none" stroke-linecap="round">
-                  <path d="M0 -84 C -48 -120 -132 -120 -188 -82" stroke="url(#heroPalmFronds)" stroke-width="16" />
-                  <path d="M0 -88 C -20 -126 -76 -140 -132 -122" stroke="url(#heroPalmFrondsLight)" stroke-width="14" />
-                  <path d="M0 -88 C 20 -126 76 -140 132 -122" stroke="url(#heroPalmFrondsLight)" stroke-width="14" />
-                  <path d="M0 -84 C 48 -120 132 -120 188 -82" stroke="url(#heroPalmFronds)" stroke-width="16" />
-                  <path d="M0 -62 C -44 -70 -104 -54 -150 -18" stroke="url(#heroPalmFronds)" stroke-width="14" />
-                  <path d="M0 -62 C 44 -70 104 -54 150 -18" stroke="url(#heroPalmFronds)" stroke-width="14" />
-                </g>
-                <circle cx="0" cy="-52" r="14" fill="url(#heroPalmFronds)" />
-                <path
-                  d="M-18 -46 L18 -46 L40 108 C 18 118 -18 118 -40 108 Z"
-                  fill="url(#heroPalmTrunk)"
-                />
-                <path
-                  d="M-70 108 C -36 134 36 134 70 108 L 70 130 C 36 146 -36 146 -70 130 Z"
-                  fill="url(#heroPalmFronds)"
-                />
-              </g>
-              <text
-                x="440"
-                y="210"
-                text-anchor="middle"
-                font-family="'Inter', sans-serif"
-                font-size="30"
-                font-weight="600"
-                letter-spacing="8"
-                fill="#33b873"
-              >
-                CITY OF PALMS
-              </text>
-            </svg>
+          <figure class="hero-logo">
+            <div class="hero-wordmark" id="heroLogoTitle">City of Fort Myers</div>
+            <figcaption id="heroLogoDesc" class="sr-only">City of Fort Myers wordmark</figcaption>
           </figure>
           <div class="stats" role="list">
             <div class="stat-card" role="listitem">
