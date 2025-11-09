@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 360">
+  <defs>
+    <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0b4cc7" />
+      <stop offset="50%" stop-color="#1e6ef2" />
+      <stop offset="100%" stop-color="#1850d1" />
+    </linearGradient>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fefefe" />
+      <stop offset="100%" stop-color="#e4eaf6" />
+    </linearGradient>
+    <linearGradient id="outlineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c3f87" />
+      <stop offset="100%" stop-color="#0f1d49" />
+    </linearGradient>
+    <linearGradient id="palmGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#50b46a" />
+      <stop offset="100%" stop-color="#1c6d38" />
+    </linearGradient>
+    <linearGradient id="beachGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#cfe9ff" />
+      <stop offset="100%" stop-color="#6ec3f4" />
+    </linearGradient>
+    <linearGradient id="sandGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f9e4b6" />
+      <stop offset="100%" stop-color="#f0c985" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(0, 10)">
+    <path d="M40 62 L70 36 H210 L210 18 L340 18 L360 36 L390 62 L360 88 L340 108 H80 L60 88 Z" fill="url(#ribbonGradient)" stroke="#082a74" stroke-width="4" />
+    <text x="115" y="58" fill="#fff" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="28" font-weight="600">CITY OF</text>
+    <text x="65" y="95" fill="#fff" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="26" font-weight="500">FORT MYERS</text>
+    <text x="235" y="95" fill="#fff" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="26" font-weight="500">FLORIDA</text>
+  </g>
+
+  <g transform="translate(60, 70)">
+    <path d="M150 0 C205 0 270 16 300 36 C320 48 326 58 326 82 L326 150 C326 210 258 240 194 274 C130 240 62 210 62 150 L62 82 C62 58 68 48 88 36 C118 16 183 0 238 0 Z" fill="url(#shieldGradient)" stroke="url(#outlineGradient)" stroke-width="8" stroke-linejoin="round" />
+    <path d="M194 -6 V280" stroke="#1c3f87" stroke-width="6" />
+    <path d="M60 138 H328" stroke="#1c3f87" stroke-width="6" />
+
+    <g transform="translate(80, 18)">
+      <rect x="0" y="0" width="112" height="120" fill="url(#beachGradient)" />
+      <path d="M0 120 H112 V132 C88 136 74 150 60 162 C44 176 30 190 0 206 Z" fill="url(#sandGradient)" />
+      <path d="M16 132 C40 128 58 136 76 146 C90 154 104 164 112 178 L112 186 C90 174 72 166 50 162 C34 160 16 162 0 168 Z" fill="#0f7ec9" opacity="0.65" />
+      <g transform="translate(38, 28)">
+        <rect x="12" y="32" width="8" height="60" fill="#2f4f1e" />
+        <path d="M16 0 C26 10 40 22 44 36 C36 36 28 28 16 28 C4 28 -4 36 -12 36 C-8 20 2 10 16 0 Z" fill="url(#palmGradient)" />
+        <path d="M12 28 C4 24 -6 20 -16 20 C-18 28 -10 36 -2 40 Z" fill="#2d8445" />
+        <path d="M20 28 C28 24 38 18 48 18 C50 28 42 36 32 40 Z" fill="#2d8445" />
+        <path d="M12 38 C6 40 0 48 0 58 C4 56 10 52 16 50 C22 52 28 56 32 58 C28 48 22 40 16 38 Z" fill="#2f7f42" />
+      </g>
+    </g>
+
+    <g transform="translate(194, 18)">
+      <rect x="0" y="0" width="112" height="120" fill="#fef5cf" />
+      <g transform="translate(20, 24)">
+        <circle cx="36" cy="36" r="28" fill="#f7a543" stroke="#d47c1b" stroke-width="4" />
+        <circle cx="72" cy="24" r="24" fill="#fbc36a" stroke="#d47c1b" stroke-width="4" />
+        <circle cx="18" cy="18" r="14" fill="#ffcf7f" stroke="#d47c1b" stroke-width="3" />
+        <path d="M36 12 C34 6 36 0 44 -6 C52 0 54 6 52 12 Z" fill="#3d7f34" />
+        <path d="M72 2 C74 -6 78 -10 88 -12 C92 -4 88 4 84 12 Z" fill="#3d7f34" />
+      </g>
+      <g transform="translate(12, 94)">
+        <path d="M0 18 C16 6 44 0 84 0 C120 0 140 6 168 18 V26 C140 14 120 10 84 10 C46 10 16 14 0 26 Z" fill="#1e74c6" opacity="0.5" />
+      </g>
+    </g>
+
+    <g transform="translate(80, 140)">
+      <rect x="0" y="0" width="112" height="116" fill="#a3dbff" />
+      <path d="M0 84 C24 70 48 64 72 66 C94 68 116 78 132 94 L132 116 H0 Z" fill="#0e79c9" opacity="0.7" />
+      <path d="M0 110 C30 98 62 94 96 98 C112 100 128 104 144 112 V116 H0 Z" fill="#095a9e" opacity="0.6" />
+      <g transform="translate(12, 12)">
+        <path d="M0 50 C12 40 26 34 40 32 C58 30 74 36 92 44" stroke="#0f4cc3" stroke-width="5" fill="none" stroke-linecap="round" />
+        <path d="M0 72 C16 60 36 54 58 56 C78 58 100 66 120 76" stroke="#1363df" stroke-width="5" fill="none" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <g transform="translate(194, 140)">
+      <rect x="0" y="0" width="112" height="116" fill="#f3fbff" />
+      <path d="M12 94 C24 68 36 48 60 34 C82 20 106 14 130 16 C118 32 104 42 90 58 C78 72 72 94 78 118 C64 110 52 98 42 84 C34 96 24 108 12 118 Z" fill="#d3e7f7" />
+      <path d="M28 96 C36 82 48 66 64 52 C74 44 84 38 96 34 C90 46 82 56 74 66 C66 76 60 90 60 104 Z" fill="#9dc4dd" />
+      <path d="M18 106 C22 100 28 94 36 86 C42 94 48 104 58 112 L50 118 C40 114 30 110 18 106 Z" fill="#7ba1b8" />
+      <path d="M56 32 C66 28 78 26 88 28 C86 34 82 40 78 46 C70 44 64 40 56 32 Z" fill="#7ba1b8" />
+      <path d="M60 50 C70 48 80 48 92 52 C88 56 82 60 76 62 C70 60 64 56 60 50 Z" fill="#6c94aa" />
+    </g>
+  </g>
+
+  <text x="210" y="340" fill="#1b3f8f" font-family="'Space Grotesk', 'Segoe UI', sans-serif" font-size="36" font-style="italic" font-weight="500" text-anchor="middle">
+    City of Palms
+  </text>
+</svg>
