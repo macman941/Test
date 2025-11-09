@@ -971,6 +971,11 @@
       const ticketTemplate = document.getElementById("ticketTemplate");
       const searchTickets = document.getElementById("searchTickets");
       const locatorFilter = document.getElementById("locatorFilter");
+
+      // Ensure any legacy export controls are removed from the archive toolbar
+      document
+        .querySelectorAll(".tickets-toolbar button")
+        .forEach((button) => button.remove());
       const statTickets = document.getElementById("statTickets");
       const statAttachments = document.getElementById("statAttachments");
       const resetFormBtn = document.getElementById("resetForm");
