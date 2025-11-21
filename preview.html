@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Utility Conflict Tracker – Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="app/globals.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Design-phase conflict tracking</p>
+          <h1>Riverbend Corridor Improvements</h1>
+          <p class="lede">
+            Assign utilities, gather comments, and route approvals so design stays ahead of field conflicts.
+          </p>
+          <div class="hero-actions">
+            <button class="btn primary">Start utility workflow</button>
+            <button class="btn ghost">Share read-only link</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-row"><span>Phase</span><strong>60% Design</strong></div>
+          <div class="hero-row"><span>Design lead</span><strong>Taylor Nguyen</strong></div>
+          <div class="hero-row"><span>Target ad date</span><strong>February 12, 2026</strong></div>
+          <div class="hero-row"><span>Next milestone</span><strong>Utility responses locked by January 5</strong></div>
+        </div>
+      </header>
+
+      <section class="panels">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Project access</p>
+              <h2>Assigned utility companies</h2>
+            </div>
+            <button class="btn">Invite utility</button>
+          </div>
+          <div class="utility-grid">
+            <article class="utility-card">
+              <div>
+                <p class="eyebrow">Water/Wastewater</p>
+                <h3>City Water &amp; Sewer</h3>
+                <p class="muted">Lead: Morgan Lee</p>
+              </div>
+              <div class="utility-meta">
+                <span class="chip">Access: Granted</span>
+                <span class="chip chip-warn">3 pending conflicts</span>
+                <span class="chip chip-warn">Response due: Dec 3</span>
+                <p class="muted">Status: Reviewing submittal</p>
+              </div>
+              <div class="utility-actions">
+                <button class="btn ghost">Open workspace</button>
+                <button class="btn">Remind to respond</button>
+              </div>
+            </article>
+            <article class="utility-card">
+              <div>
+                <p class="eyebrow">Gas</p>
+                <h3>Northern Gas</h3>
+                <p class="muted">Lead: Jamie Patel</p>
+              </div>
+              <div class="utility-meta">
+                <span class="chip">Access: Invited</span>
+                <span class="chip chip-warn">4 pending conflicts</span>
+                <span class="chip chip-warn">Response due: Dec 12</span>
+                <p class="muted">Status: Awaiting markups</p>
+              </div>
+              <div class="utility-actions">
+                <button class="btn ghost">Open workspace</button>
+                <button class="btn">Resend invite</button>
+              </div>
+            </article>
+            <article class="utility-card">
+              <div>
+                <p class="eyebrow">Fiber/Communications</p>
+                <h3>BrightFiber</h3>
+                <p class="muted">Lead: Lauren Brooks</p>
+              </div>
+              <div class="utility-meta">
+                <span class="chip chip-good">Access: Granted</span>
+                <span class="chip">1 pending conflict</span>
+                <span class="chip">Response due: Nov 29</span>
+                <p class="muted">Status: Approved with comments</p>
+              </div>
+              <div class="utility-actions">
+                <button class="btn ghost">Open workspace</button>
+                <button class="btn">Send follow-up</button>
+              </div>
+            </article>
+            <article class="utility-card">
+              <div>
+                <p class="eyebrow">Power</p>
+                <h3>City Power</h3>
+                <p class="muted">Lead: Emilio Torres</p>
+              </div>
+              <div class="utility-meta">
+                <span class="chip chip-good">Access: Granted</span>
+                <span class="chip">2 pending conflicts</span>
+                <span class="chip">Response due: Dec 8</span>
+                <p class="muted">Status: Needs updated relocation plan</p>
+              </div>
+              <div class="utility-actions">
+                <button class="btn ghost">Open workspace</button>
+                <button class="btn">Schedule check-in</button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Conflict log</p>
+              <h2>Active conflicts &amp; responses</h2>
+            </div>
+            <button class="btn">Export log</button>
+          </div>
+          <div class="conflict-list">
+            <article class="conflict-card">
+              <div class="conflict-row">
+                <div>
+                  <p class="eyebrow">UC-012 · Northern Gas</p>
+                  <h3>Sta. 14+50 to 16+00</h3>
+                  <p class="muted">12" gas main within proposed storm trunk alignment.</p>
+                </div>
+                <div class="conflict-meta">
+                  <span class="badge badge-high">High</span>
+                  <span class="chip chip-warn">Awaiting utility response</span>
+                  <span class="chip chip-warn">Due: Dec 12</span>
+                  <p class="muted">Owner: Jamie Patel</p>
+                </div>
+              </div>
+              <ul class="action-list">
+                <li>Upload utility profile</li>
+                <li>Confirm abandonment sequence</li>
+              </ul>
+            </article>
+
+            <article class="conflict-card">
+              <div class="conflict-row">
+                <div>
+                  <p class="eyebrow">UC-018 · BrightFiber</p>
+                  <h3>Sta. 03+10</h3>
+                  <p class="muted">Fiber vault conflicts with new signal cabinet pad.</p>
+                </div>
+                <div class="conflict-meta">
+                  <span class="badge badge-medium">Medium</span>
+                  <span class="chip">Designer reviewing</span>
+                  <span class="chip">Due: Nov 29</span>
+                  <p class="muted">Owner: Lauren Brooks</p>
+                </div>
+              </div>
+              <ul class="action-list">
+                <li>Provide temp bypass plan</li>
+              </ul>
+            </article>
+
+            <article class="conflict-card">
+              <div class="conflict-row">
+                <div>
+                  <p class="eyebrow">UC-021 · City Water &amp; Sewer</p>
+                  <h3>Sta. 22+75</h3>
+                  <p class="muted">Sanitary service crossing at proposed box culvert wing wall.</p>
+                </div>
+                <div class="conflict-meta">
+                  <span class="badge badge-high">High</span>
+                  <span class="chip chip-critical">Revision required</span>
+                  <span class="chip chip-warn">Due: Dec 3</span>
+                  <p class="muted">Owner: Morgan Lee</p>
+                </div>
+              </div>
+              <ul class="action-list">
+                <li>Approve relocation submittal</li>
+                <li>Record clean-out offset</li>
+              </ul>
+            </article>
+
+            <article class="conflict-card">
+              <div class="conflict-row">
+                <div>
+                  <p class="eyebrow">UC-027 · City Power</p>
+                  <h3>Sta. 28+00</h3>
+                  <p class="muted">Overhead power conflicting with crane swing radius.</p>
+                </div>
+                <div class="conflict-meta">
+                  <span class="badge badge-low">Low</span>
+                  <span class="chip">In design response</span>
+                  <span class="chip">Due: Dec 8</span>
+                  <p class="muted">Owner: Emilio Torres</p>
+                </div>
+              </div>
+              <ul class="action-list">
+                <li>Add clearance note to plan</li>
+                <li>Schedule field meet</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Workflow</p>
+              <h2>Response &amp; approval steps</h2>
+            </div>
+            <button class="btn">Configure workflow</button>
+          </div>
+          <div class="workflow-grid">
+            <article class="workflow-card">
+              <header>
+                <div>
+                  <p class="eyebrow">Utility company</p>
+                  <h3>Utility submittal</h3>
+                </div>
+                <span class="chip chip-warn">2 pending</span>
+              </header>
+              <p class="muted">Upload relocation drawings and schedule for review.</p>
+              <button class="btn ghost">Request files</button>
+            </article>
+            <article class="workflow-card">
+              <header>
+                <div>
+                  <p class="eyebrow">Design team</p>
+                  <h3>Design review</h3>
+                </div>
+                <span class="chip">In progress</span>
+              </header>
+              <p class="muted">Respond with comments and acceptable alignments.</p>
+              <button class="btn ghost">Open reviewer workspace</button>
+            </article>
+            <article class="workflow-card">
+              <header>
+                <div>
+                  <p class="eyebrow">Utility company</p>
+                  <h3>Utility approval</h3>
+                </div>
+                <span class="chip">Awaiting signatures</span>
+              </header>
+              <p class="muted">Sign off on conflict resolutions and mitigations.</p>
+              <button class="btn ghost">Send approval packet</button>
+            </article>
+            <article class="workflow-card">
+              <header>
+                <div>
+                  <p class="eyebrow">PM/Inspector</p>
+                  <h3>Closeout &amp; tracking</h3>
+                </div>
+                <span class="chip">On schedule</span>
+              </header>
+              <p class="muted">Lock responses, archive PDFs, and update conflict log.</p>
+              <button class="btn ghost">Close resolved items</button>
+            </article>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Activity</p>
+              <h2>Recent changes</h2>
+            </div>
+            <button class="btn">View history</button>
+          </div>
+          <div class="activity-list">
+            <article class="activity-card">
+              <div>
+                <h3>Taylor Nguyen</h3>
+                <p class="muted">Project manager · 10:14 AM</p>
+              </div>
+              <p>Published 60% plans and requested responses from 4 utilities.</p>
+            </article>
+            <article class="activity-card">
+              <div>
+                <h3>Morgan Lee (City Water)</h3>
+                <p class="muted">Utility reviewer · 9:20 AM</p>
+              </div>
+              <p>Flagged UC-021 as high priority and attached revised sewer profile.</p>
+            </article>
+            <article class="activity-card">
+              <div>
+                <h3>Lauren Brooks (BrightFiber)</h3>
+                <p class="muted">Utility reviewer · Yesterday</p>
+              </div>
+              <p>Approved UC-018 with temporary bypass staging, awaiting design note.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
