@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fort Myers Locate Tracker",
-  description: "Interactive locate ticket board for City of Fort Myers utility coordination.",
+  title: "Utility Conflict Tracker",
+  description: "Coordinate utility companies, review conflicts, and approve submittals during design.",
 };
 
 export default function RootLayout({
